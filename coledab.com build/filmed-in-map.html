@@ -22,8 +22,8 @@ const FILMED = new Set([
   "united kingdom","france","belgium","netherlands","luxembourg","germany",
   "switzerland","austria","czechia","poland","hungary","italy","spain","romania",
   "turkey","united arab emirates","qatar","armenia","kazakhstan","uzbekistan",
-  "egypt","south africa","botswana","namibia","zimbabwe","tanzania","zambia",
-  "belize","bahamas","saint lucia"
+  "egypt","south africa","botswana","namibia","zimbabwe","tanzania","zambia","rwanda",
+  "belize","bahamas","saint lucia","vatican"
 ]);
 const ALIAS = {
   "united states":"united states of america",
@@ -32,20 +32,26 @@ const ALIAS = {
   "united republic of tanzania":"tanzania",
   "w. sahara":"western sahara",
   "st. lucia":"saint lucia",
-  "the bahamas":"bahamas"
+  "the bahamas":"bahamas",
+  "england":"united kingdom",
+  "scotland":"united kingdom",
+  "the vatican":"vatican",
+  "vatican city":"vatican"
 };
-const key = n => {
-  const k = String(n || "").toLowerCase();
-  return ALIAS[k] || k;
-};
+const key = n => { const k = String(n || "").toLowerCase(); return ALIAS[k] || k; };
 const DISPLAY_NAME = {
-  "united states of america": "United States",
+  "united states of america": "United States of America",
   "czechia": "Czech Republic",
-  "bahamas": "Bahamas",
   "saint lucia": "St. Lucia",
-  "united republic of tanzania": "Tanzania"
+  "united republic of tanzania": "Tanzania",
+  "united kingdom": "England / Scotland",
+  "vatican": "The Vatican"
 };
 const displayName = raw => DISPLAY_NAME[key(raw)] || raw;
+
+// Mainland-only clipping: keep polygons inside the listed lon/lat box (France's
+// overseas departments in South America shouldn't light up with the European one).
+const MAINLAND = { france: [-6, 41, 10, 52] };
 
 // West edge clears Alaska mainland; east edge clears Kazakhstan; south edge clears Tierra del Fuego.
 const LON0 = -168, LON1 = 88, LAT0 = 72, LAT1 = -56;
@@ -56,8 +62,32 @@ const H = Math.round(SCALE * (LAT0 - LAT1) * RAD);
 const TX = -SCALE * LON0 * RAD;
 const TY = SCALE * LAT0 * RAD;
 
+const FILL = "#ffffff", FILL_OFF = "#1e1e21", FILL_HL = "#ff5a36";
+const POINTS = [
+  { k: "saint lucia", coords: [-60.978, 13.909] },
+  { k: "vatican", coords: [12.4534, 41.9029] }
+];
+
+function clipToMainland(feature) {
+  const box = MAINLAND[key(feature.properties.name)];
+  if (!box || feature.geometry.type !== "MultiPolygon") return feature;
+  const [w0, s0, e0, n0] = box;
+  const inside = feature.geometry.coordinates.filter(poly => {
+    const ring = poly[0] || [];
+    let lon = 0, lat = 0;
+    ring.forEach(p => { lon += p[0]; lat += p[1]; });
+    if (!ring.length) return false;
+    lon /= ring.length; lat /= ring.length;
+    return lon >= w0 && lon <= e0 && lat >= s0 && lat <= n0;
+  });
+  if (!inside.length) return feature;
+  return Object.assign({}, feature, {
+    geometry: { type: "MultiPolygon", coordinates: inside }
+  });
+}
+
 d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json").then(topo => {
-  const countries = topojson.feature(topo, topo.objects.countries).features;
+  const countries = topojson.feature(topo, topo.objects.countries).features.map(clipToMainland);
   const projection = d3.geoEquirectangular().scale(SCALE).translate([TX, TY]);
   projection.clipExtent([[0, 0], [W, H]]);
   const path = d3.geoPath(projection);
@@ -66,60 +96,82 @@ d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json").th
     .attr("viewBox", "0 0 " + W + " " + H)
     .attr("preserveAspectRatio", "xMidYMid meet");
 
-  svg.append("rect")
-    .attr("width", W).attr("height", H)
-    .attr("fill", "#101012");
-
+  svg.append("rect").attr("width", W).attr("height", H).attr("fill", "#101012");
   const tooltip = d3.select("#tooltip");
 
-  svg.append("g").selectAll("path")
+  const post = k => {
+    if (window.parent === window) return;
+    window.parent.postMessage({ type: "map-hover", key: k }, "*");
+  };
+  const place = event => {
+    const rect = document.getElementById("map").getBoundingClientRect();
+    tooltip.style("left", (event.clientX - rect.left) + "px")
+           .style("top", (event.clientY - rect.top - 10) + "px");
+  };
+
+  const shapes = svg.append("g").selectAll("path")
     .data(countries)
     .join("path")
     .attr("d", path)
     .attr("class", d => FILMED.has(key(d.properties.name)) ? "country-filmed" : "")
-    .attr("fill", d => FILMED.has(key(d.properties.name)) ? "#ffffff" : "#1e1e21")
-    .attr("stroke", d => FILMED.has(key(d.properties.name)) ? "#0a0a0b" : "#0a0a0b")
+    .attr("data-key", d => key(d.properties.name))
+    .attr("fill", d => FILMED.has(key(d.properties.name)) ? FILL : FILL_OFF)
+    .attr("stroke", "#0a0a0b")
     .attr("stroke-width", d => FILMED.has(key(d.properties.name)) ? 0.6 : 0.5)
-    .attr("opacity", 1)
+    .style("transition", "fill .2s ease")
     .on("mouseenter", function (event, d) {
-      if (!FILMED.has(key(d.properties.name))) return;
-      d3.select(this).attr("fill", "#ff5a36");
+      const k = key(d.properties.name);
+      if (!FILMED.has(k)) return;
+      d3.select(this).attr("fill", FILL_HL);
       tooltip.style("opacity", 1).text(displayName(d.properties.name));
+      post(k);
     })
     .on("mousemove", function (event, d) {
       if (!FILMED.has(key(d.properties.name))) return;
-      const rect = document.getElementById("map").getBoundingClientRect();
-      tooltip.style("left", (event.clientX - rect.left) + "px").style("top", (event.clientY - rect.top - 10) + "px");
+      place(event);
     })
     .on("mouseleave", function (event, d) {
-      if (!FILMED.has(key(d.properties.name))) return;
-      d3.select(this).attr("fill", "#ffffff");
+      const k = key(d.properties.name);
+      if (!FILMED.has(k)) return;
+      d3.select(this).attr("fill", FILL);
       tooltip.style("opacity", 0);
+      post(null);
     });
 
-  // Saint Lucia is below the 110m dataset's size threshold — plot it as a point
-  const stLucia = projection([-60.978, 13.909]);
-  if (stLucia) {
-    svg.append("circle")
-      .attr("class", "country-filmed")
-      .attr("cx", stLucia[0]).attr("cy", stLucia[1]).attr("r", 3)
-      .attr("fill", "#ffffff")
-      .on("mouseenter", function () {
-        d3.select(this).attr("fill", "#ff5a36");
-        tooltip.style("opacity", 1).text("St. Lucia");
-      })
-      .on("mousemove", function (event) {
-        const rect = document.getElementById("map").getBoundingClientRect();
-        tooltip.style("left", (event.clientX - rect.left) + "px").style("top", (event.clientY - rect.top - 10) + "px");
-      })
-      .on("mouseleave", function () {
-        d3.select(this).attr("fill", "#ffffff");
-        tooltip.style("opacity", 0);
-      });
-  }
+  const dots = svg.append("g").selectAll("circle")
+    .data(POINTS.map(p => Object.assign({}, p, { xy: projection(p.coords) })).filter(p => p.xy))
+    .join("circle")
+    .attr("class", "country-filmed")
+    .attr("data-key", d => d.k)
+    .attr("cx", d => d.xy[0]).attr("cy", d => d.xy[1]).attr("r", 3)
+    .attr("fill", FILL)
+    .style("transition", "fill .2s ease")
+    .on("mouseenter", function (event, d) {
+      d3.select(this).attr("fill", FILL_HL);
+      tooltip.style("opacity", 1).text(DISPLAY_NAME[d.k] || d.k);
+      post(d.k);
+    })
+    .on("mousemove", function (event) { place(event); })
+    .on("mouseleave", function () {
+      d3.select(this).attr("fill", FILL);
+      tooltip.style("opacity", 0);
+      post(null);
+    });
+
+  window.addEventListener("message", e => {
+    const msg = e.data || {};
+    if (msg.type !== "map-highlight") return;
+    const k = msg.key ? key(msg.key) : null;
+    shapes.attr("fill", d => {
+      const dk = key(d.properties.name);
+      if (!FILMED.has(dk)) return FILL_OFF;
+      return dk === k ? FILL_HL : FILL;
+    });
+    dots.attr("fill", d => (d.k === k ? FILL_HL : FILL));
+  });
 
   const matched = new Set(countries.map(d => key(d.properties.name)).filter(n => FILMED.has(n)));
-  const missing = [...FILMED].filter(n => !matched.has(n) && n !== "saint lucia");
+  const missing = [...FILMED].filter(n => !matched.has(n) && !POINTS.some(p => p.k === n));
   if (missing.length) console.warn("Unmatched country names:", missing);
 });
 </script>

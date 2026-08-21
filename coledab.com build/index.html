@@ -32,11 +32,17 @@
 </helmet>
 
 <div style="min-height:100vh;background:#0a0a0b">
-  <a href="#contact" style="position:fixed;top:clamp(20px,3.4vw,44px);right:clamp(20px,3.4vw,44px);z-index:40;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:#f2f2f0;padding:10px 18px;border:1px solid rgba(242,242,240,.14);border-radius:999px;background:rgba(10,10,11,.5);backdrop-filter:blur(8px);transition:border-color .4s cubic-bezier(.22,.61,.36,1),background .4s cubic-bezier(.22,.61,.36,1)" style-hover="border-color:#f2f2f0;background:rgba(10,10,11,.85);color:#f2f2f0">Contact</a>
+  <nav aria-label="Main" style="position:fixed;top:clamp(20px,3.4vw,44px);right:clamp(20px,3.4vw,44px);z-index:40;display:flex;align-items:center;gap:8px">
+  <a href="About.dc.html" style="font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:#f2f2f0;padding:10px 18px;border:1px solid rgba(242,242,240,.14);border-radius:999px;background:rgba(10,10,11,.5);backdrop-filter:blur(8px);transition:border-color .4s cubic-bezier(.22,.61,.36,1),background .4s cubic-bezier(.22,.61,.36,1)" style-hover="border-color:#f2f2f0;background:rgba(10,10,11,.85)">About</a>
+  <a href="Contact.dc.html" style="font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:#f2f2f0;padding:10px 18px;border:1px solid rgba(242,242,240,.14);border-radius:999px;background:rgba(10,10,11,.5);backdrop-filter:blur(8px);transition:border-color .4s cubic-bezier(.22,.61,.36,1),background .4s cubic-bezier(.22,.61,.36,1)" style-hover="border-color:#f2f2f0;background:rgba(10,10,11,.85);color:#f2f2f0">Contact</a>
+  </nav>
 
   <header style="padding:clamp(72px,11vh,128px) clamp(24px,4vw,48px) 0;display:flex;flex-direction:column;gap:clamp(20px,3vw,36px)">
     <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;max-width:1400px;width:100%;margin:0 auto">
-      <h1 style="margin:0;font-family:Fraunces,Georgia,serif;font-weight:500;font-size:clamp(32px,5.4vw,76px);letter-spacing:-.035em;line-height:.96">cole dab</h1><p style="margin: 0 0 clamp(6px,1vw,14px); font-family: Fraunces,Georgia,serif; font-weight: 400; font-size: clamp(17px,1.5vw,22px); letter-spacing: .13em; text-transform: uppercase; color: rgba(242,242,240,.5)">MUSIC VIDEO DIRECTOR</p>
+      <div style="display:flex;flex-direction:column;gap:clamp(8px,1vw,14px)">
+        <h1 style="margin:0;font-family:Fraunces,Georgia,serif;font-weight:500;font-size:clamp(32px,5.4vw,76px);letter-spacing:-.035em;line-height:.96">cole dab</h1>
+        <p style="margin:0;font-family:'Schibsted Grotesk',system-ui,sans-serif;font-weight:400;font-size:clamp(10px,.85vw,12px);letter-spacing:.28em;text-transform:uppercase;white-space:nowrap;color:rgba(242,242,240,.38)">MUSIC VIDEO DIRECTOR</p>
+      </div>
       
     </div>
     <div style="width:100%;max-width:1400px;margin:0 auto">
@@ -72,11 +78,11 @@
               <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#0a0a0b;transform:translateZ(0);isolation:isolate">
                 <img src="{{ v.thumb }}" onError="{{ onThumbError }}" onLoad="{{ onThumbLoad }}" alt="" loading="lazy" style="display:block;width:100.4%;height:100.4%;margin:-0.2% 0 0 -0.2%;object-fit:cover;backface-visibility:hidden;will-change:transform,filter,opacity;filter:{{ v.filter }};opacity:{{ v.imgOpacity }};transform:{{ v.imgScale }};transition:opacity .5s cubic-bezier(.22,.61,.36,1),filter .5s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
                 <div style="position: absolute; inset: 0; background: linear-gradient(to top,rgba(8,8,9,.78) 0%,rgba(8,8,9,0) 46%); opacity: {{ v.scrimOpacityFinal }}; transition: opacity .4s cubic-bezier(.22,.61,.36,1); pointer-events: none"></div>
-                <div style="position:absolute;left:clamp(12px,1.2vw,18px);right:clamp(12px,1.2vw,18px);top:{{ v.capTop }};bottom:{{ v.capBottom }};display:flex;flex-direction:column;align-items:{{ v.capAlign }};text-align:{{ v.capText }};gap:3px;opacity:{{ v.capOpacity }};transform:{{ v.capShift }};transition:opacity .4s cubic-bezier(.22,.61,.36,1),transform .45s cubic-bezier(.22,.61,.36,1);pointer-events:none">
-                  <span style="font-family: 'Schibsted Grotesk',system-ui,sans-serif; font-size: clamp(18px,1.6vw,23px); font-weight: 500; letter-spacing: -.02em; line-height: 1.15; color: {{ v.textColor }}; text-shadow: 0 1px 4px rgba(0,0,0,.95), 0 4px 20px rgba(0,0,0,.85)">{{ v.artist }}</span>
-                  <span style="font-size: clamp(13px,1.15vw,15px); font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: {{ v.subColor }}; text-shadow: 0 1px 4px rgba(0,0,0,.95), 0 4px 20px rgba(0,0,0,.85)">{{ v.title }}</span>
-                  <sc-if value="{{ v.hasCredit }}" hint-placeholder-val="{{ false }}">
-                    <span style="font-family: Fraunces,Georgia,serif; font-style: italic; font-size: clamp(12px,1.05vw,14px); font-weight: 400; letter-spacing: 0; color: {{ v.subColor }}; text-shadow: 0 1px 4px rgba(0,0,0,.95), 0 4px 20px rgba(0,0,0,.85)">{{ v.credit }}</span>
+                <div style="position:absolute;left:clamp(12px,1.2vw,18px);right:clamp(12px,1.2vw,18px);top:{{ v.capTop }};bottom:{{ v.capBottom }};display:flex;flex-direction:column;align-items:{{ v.capAlign }};text-align:{{ v.capText }};gap:{{ v.capGap }};opacity:{{ v.capOpacity }};transform:{{ v.capShift }};transition:opacity .4s cubic-bezier(.22,.61,.36,1),transform .45s cubic-bezier(.22,.61,.36,1);pointer-events:none">
+                  <span style="font-family: 'Schibsted Grotesk',system-ui,sans-serif; font-size: {{ v.capNameSize }}; font-weight: 500; letter-spacing: -.02em; line-height: 1.2; color: {{ v.capNameColor }}; text-shadow: 0 1px 4px rgba(0,0,0,.95), 0 4px 20px rgba(0,0,0,.85)">{{ v.artist }}</span>
+                  <span style="font-size: {{ v.capTitleSize }}; font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: {{ v.capSubColor }}; text-shadow: 0 1px 4px rgba(0,0,0,.95), 0 4px 20px rgba(0,0,0,.85)">{{ v.title }}</span>
+                  <sc-if value="{{ v.showCredit }}" hint-placeholder-val="{{ false }}">
+                    <span style="font-family: Fraunces,Georgia,serif; font-style: italic; font-size: clamp(12px,1.05vw,14px); font-weight: 400; letter-spacing: 0; color: {{ v.capSubColor }}; text-shadow: 0 1px 4px rgba(0,0,0,.95), 0 4px 20px rgba(0,0,0,.85)">{{ v.credit }}</span>
                   </sc-if>
                 </div>
               </div>
@@ -104,7 +110,7 @@
 
     <section style="max-width:1400px;margin:0 auto;padding:clamp(48px,7vh,84px) clamp(24px,4vw,48px) 0;display:grid;gap:clamp(32px,4vw,64px);grid-template-columns:{{ metaColumns }}">
       <div>
-        <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">Labels</h2>
+        <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">Record Labels</h2>
         <sc-if value="{{ asLogos }}" hint-placeholder-val="{{ true }}">
           <ul style="margin:0;padding:clamp(24px,2.8vw,38px) 0 0;list-style:none;display:flex;align-items:center;justify-content:center;gap:clamp(40px,4.5vw,70px);overflow:hidden">
             <sc-for list="{{ labels }}" as="l" hint-placeholder-count="0">
@@ -149,27 +155,18 @@
       </div>
     </section>
 
-    <section aria-label="About" style="max-width:1400px;margin:0 auto;padding:clamp(64px,9vh,110px) clamp(24px,4vw,48px) 0;display:grid;gap:clamp(32px,4vw,64px);grid-template-columns:{{ metaColumns }};align-items:stretch">
-      <div style="display:flex;flex-direction:column">
-        <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">Bio</h2>
-        <div style="padding:clamp(10px,1.2vw,16px) 0 0;display:flex;flex-direction:column;gap:1.15em;font-family:'Schibsted Grotesk',system-ui,sans-serif;font-weight:400;font-size:clamp(18px,1.9vw,23px);line-height:1.62;letter-spacing:-.005em;color:rgba(242,242,240,.72)">
-          <p style="margin:0;text-indent:0"><strong style="font-weight:600;color:#f2f2f0">Cole Dabney</strong> started in the hardcore scene, shooting bands from the pit at <strong style="font-weight:600;color:#f2f2f0">Warped Tour</strong> before there was a barricade. He's since become a favorite director across genres — from country artists in the hayfields to pop stars in the big city.</p>
-          <p style="margin:0;text-indent:0">That range led him to become <strong style="font-weight:600;color:#f2f2f0">Jennifer Lopez</strong>'s go-to videographer, traveling with her around the world on tours and to award shows, festivals like <strong style="font-weight:600;color:#f2f2f0">Coachella</strong>, and <strong style="font-weight:600;color:#f2f2f0">Netflix</strong> film sets. His most recent music video, "Save Me Tonight" from J.Lo and <strong style="font-weight:600;color:#f2f2f0">David Guetta</strong>, was released through <strong style="font-weight:600;color:#f2f2f0">Warner Records</strong>.</p>
-          <p style="margin:0;text-indent:0">Cole's debut feature film as producer, COTTON CANDY BUBBLE GUM, premiered at the <strong style="font-weight:600;color:#f2f2f0">SXSW Film Festival</strong> and was acquired by <strong style="font-weight:600;color:#f2f2f0">Shout! Factory</strong> for worldwide distribution after winning Best Comedy at the Hollywood Film Festival.</p>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column">
-        <h2 style="margin: 0; font-size: clamp(22px,1.95vw,27px); font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: rgba(242,242,240,.46); padding-bottom: 20px; border-bottom: 1px solid rgba(242,242,240,.14); line-height: 1.2">{{ countryTotal }} Countries Across 5 Continents</h2>
-        <div style="padding:clamp(16px,2vw,26px) 0 0;display:flex;align-items:center">
-          <iframe src="filmed-in-map.html" title="Map of countries filmed in" loading="lazy" style="width:100%;aspect-ratio:900/450;border:0;display:block;background:#0a0a0b"></iframe>
-        </div>
-        <div style="padding:clamp(14px,1.8vw,22px) 0 0;display:flex;flex-direction:column;gap:8px">
+    <section aria-label="Countries filmed in" style="max-width:1400px;margin:0 auto;padding:clamp(64px,9vh,110px) clamp(24px,4vw,48px) 0;display:grid;gap:clamp(32px,4vw,64px);grid-template-columns:minmax(0,1fr);align-items:stretch">
+            <div style="display:flex;flex-direction:column">
+        <h2 style="margin: 0; font-size: clamp(22px,1.95vw,27px); font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: rgba(242,242,240,.46); padding-bottom: 20px; border-bottom: 1px solid rgba(242,242,240,.14); line-height: 1.2">Filmed in {{ countryTotal }} Countries Across 5 Continents</h2>
+        <div style="padding:clamp(16px,2vw,26px) 0 0;display:grid;gap:clamp(24px,3vw,52px);grid-template-columns:{{ mapColumns }};align-items:center">
+          <iframe ref="{{ mapRef }}" src="filmed-in-map.html" title="Map of countries filmed in" loading="lazy" style="width:100%;aspect-ratio:900/450;border:0;display:block;background:#0a0a0b"></iframe>
+        <div style="display:flex;flex-direction:column;gap:clamp(10px,1.4vw,18px)">
           <sc-for list="{{ countries }}" as="c" hint-placeholder-count="4">
             <div style="display:grid;gap:4px 20px;grid-template-columns:minmax(0,1fr);align-items:baseline">
               <h3 style="margin:0;font-size:9px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(242,242,240,.34)">{{ c.region }}</h3>
-              <ul style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:4px 12px;font-family:'Schibsted Grotesk',system-ui,sans-serif;font-weight:500;font-size:clamp(15px,1.55vw,19px);line-height:1.3;letter-spacing:-.01em;color:rgba(242,242,240,.6)">
+              <ul style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:4px 12px;font-family:'Schibsted Grotesk',system-ui,sans-serif;font-weight:500;font-size:clamp(15px,1.55vw,19px);line-height:1.3;letter-spacing:-.01em">
                 <sc-for list="{{ c.list }}" as="n" hint-placeholder-count="6">
-                  <li>{{ n }}</li>
+                  <li onMouseEnter="{{ n.enter }}" onMouseLeave="{{ n.leave }}" style="cursor:default;color:{{ n.color }};transition:color .2s ease">{{ n.name }}</li>
                 </sc-for>
               </ul>
             </div>
@@ -225,37 +222,37 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;creditsStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Logos&quot;,&quot;options&quot;:[&quot;Logos&quot;,&quot;Text&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Labels &amp; featured on&quot;}}">
 const VIDEOS = [
-  { yt: "y8HLQn3YAiw", artist: "Jennifer Lopez & David Guetta", title: "Save Me Tonight", credit: "Warner Records", cover: "assets/covers/jlo-save-me-tonight.jpg", align: "center", vpos: "top" },
-  { yt: "Gv1kmoTihz8", artist: "Chip Tha Ripper", title: "don't u see i'm on the phone?!", cover: "assets/covers/chip-dont-u-see-me-on-the-phone.jpg" },
-  { yt: "oRwLPDbkKd0", artist: "Hail The Sun", title: "Entertainment Lies", credit: "Equal Vision Records", cover: "assets/covers/hail-the-sun-ent-lies.jpg", brightOff: 1.9, brightOn: 1.15 },
+  { yt: "y8HLQn3YAiw", artist: "Jennifer Lopez & David Guetta", title: "Save Me Tonight", credit: "Warner Records", cover: "assets/covers/jlo-save-me-tonight.jpg", align: "center", vpos: "top", contrastOff: 1.72, contrastOn: 1.3, brightOff: 0.8 },
+  { yt: "Gv1kmoTihz8", artist: "Chip Tha Ripper", title: "don't u see i'm on the phone?!", cover: "assets/covers/chip-dont-u-see-me-on-the-phone.jpg", contrastOff: 1.14, contrastOn: 1.04, brightOff: 0.97 },
+  { yt: "oRwLPDbkKd0", artist: "Hail The Sun", title: "Entertainment Lies", credit: "Equal Vision Records", cover: "assets/covers/hail-the-sun-ent-lies.jpg", brightOff: 1.34, brightOn: 1.02, contrastOff: 1.12, contrastOn: 1.04 },
   { yt: "GVYGBuoZ5ds", artist: "Sylar", title: "Assume", credit: "Hopeless Records", align: "right", cover: "assets/covers/assume.jpg" },
   { yt: "QjBCIB0GDmA", artist: "Sylar", title: "Shook!", credit: "Hopeless Records", align: "center", cover: "assets/covers/shook.jpg" },
-  { yt: "5gKBMjnjj4U", artist: "The Sometimes Island", title: "Magical Thinking", cover: "assets/covers/magical-thinking.jpg" },
-  { yt: "n8o8qANcUSc", artist: "King Chip x Fredo Santana", title: "Destroy", credit: "World Star Hip Hop Debut", cover: "assets/covers/destroy.jpg" },
-  { yt: "XvPSAhjXk54", artist: "Icarus the Owl", title: "Dream Shade", credit: "Blue Swan Records", cover: "assets/covers/icarus.jpg", align: "right" },
-  { yt: "S13Vh1M201E", artist: "Helen Rose", title: "King of This Town", credit: "Clover Music Group", cover: "assets/covers/helen-rose.jpg" },
-  { yt: "p_qf4AS8Qyw", artist: "We Came As Romans", title: "A War Inside", credit: "Equal Vision Records", cover: "assets/covers/wcar-war.png", vpos: "top", textColor: "#0a0a0b", scrim: false },
   { yt: "UfyiViEl2hA", artist: "Young Milli", title: "Okay, I'm Reloaded" },
+  { yt: "n8o8qANcUSc", artist: "King Chip x Fredo Santana", title: "Destroy", credit: "World Star Hip Hop Debut", cover: "assets/covers/destroy.jpg" },
+  { yt: "XvPSAhjXk54", artist: "Icarus the Owl", title: "Dream Shade", credit: "Blue Swan Records", cover: "assets/covers/icarus.jpg", align: "right", contrastOff: 1.4, contrastOn: 1.15, brightOff: 0.95 },
+  { yt: "S13Vh1M201E", artist: "Helen Rose", title: "King of This Town", credit: "Clover Music Group", cover: "assets/covers/helen-rose.jpg", flip: true },
+  { yt: "p_qf4AS8Qyw", artist: "We Came As Romans", title: "A War Inside", credit: "Equal Vision Records", cover: "assets/covers/wcar-war.png", vpos: "top", textColor: "#0a0a0b", scrim: false },
+  { yt: "5gKBMjnjj4U", artist: "The Sometimes Island", title: "Magical Thinking", cover: "assets/covers/magical-thinking.jpg", contrastOff: 1.24, contrastOn: 1.08, brightOff: 0.92 },
   { yt: "GQZryuPliQ0", artist: "Hail The Sun", title: "Relax / Divide", credit: "Blue Swan Records", cover: "assets/covers/relax-divide.png", align: "right" },
-  { yt: "G5hDwJ3_Uc8", artist: "Of Mice & Men", title: "Second & Sebring", credit: "Rise Records", cover: "assets/covers/of-mice-and-men.png" },
-  { yt: "A1217ckwc_E", artist: "Drew Fish Band", title: "Small Price to Pay", credit: "CMT Exclusive Premiere", cover: "assets/covers/drew-fish-small-price.png", align: "right" },
-  { yt: "OyScIOIjfMI", artist: "Crucible x The Plot In You", title: "Slave to the Dime", cover: "assets/covers/crucible.jpg", brightOff: 1.25, brightOn: 1.15, align: "center", vpos: "bottom" }
+  { yt: "OyScIOIjfMI", artist: "Crucible x The Plot In You", title: "Slave to the Dime", cover: "assets/covers/crucible.jpg", brightOff: 1.12, brightOn: 1.08, contrastOff: 1.16, contrastOn: 1.06, align: "center", vpos: "bottom" },
+  { yt: "A1217ckwc_E", artist: "Drew Fish Band", title: "Small Price to Pay", credit: "CMT Exclusive Premiere", cover: "assets/covers/drew-fish-small-price.png", align: "right", contrastOff: 1.46, contrastOn: 1.18, brightOff: 0.84 },
+  { yt: "G5hDwJ3_Uc8", artist: "Of Mice & Men", title: "Second & Sebring", credit: "Rise Records", cover: "assets/covers/of-mice-and-men.png" }
 ];
-const TIER1 = ["Jennifer Lopez", "David Guetta", "Skrillex", "Kid Cudi", "Chip Tha Ripper", "2 Chainz", "Juicy J", "Rae Sremmurd", "Swae Lee", "Macklemore", "A Day To Remember", "Pierce The Veil", "All Time Low"];
-const TIER2 = ["Asking Alexandria", "Beartooth", "Hunter Hayes", "Joe Nichols", "King Chip", "Knocked Loose", "Motionless In White", "Of Mice & Men", "Sleeping With Sirens", "$NOT", "Sueco", "The Devil Wears Prada", "The Plot In You", "Underoath", "We Came As Romans"];
-const TIER3 = ["Attila", "Breathe Carolina", "Chelsea Grin", "Chiodos", "Dance Gavin Dance", "Emmure", "Hail The Sun", "I See Stars", "Lil Aaron", "Miss May I", "Mod Sun", "Northlane", "Saosin", "Sylar", "The Amity Affliction", "Volumes", "Whitechapel"];
-const TIER4 = ["2x4", "Abandon All Ships", "As Cities Burn", "Boondock", "Crucible", "Drew Fish Band", "For All Those Sleeping", "For Today", "I Married The Prom Queen", "I Set My Friends On Fire", "Icarus The Owl", "In Fear And Faith", "InkMonstarr", "iwrestledabearonce", "Landon Tewers", "Lil Milez", "Mickey Munday", "Myke Terry", "Sworn In", "The Air I Breathe", "Woe, Is Me", "Y2"];
+const TIER1 = ["Jennifer Lopez", "David Guetta", "Skrillex", "Kid Cudi", "2 Chainz", "Juicy J", "Rae Sremmurd", "Swae Lee", "Macklemore", "Pierce The Veil"];
+const TIER2 = ["All Time Low", "Asking Alexandria", "Beartooth", "Big Boi", "Bring Me The Horizon", "Chip Tha Ripper", "A Day To Remember", "The Devil Wears Prada", "Gym Class Heroes", "Hunter Hayes", "Joe Nichols", "King Chip", "Knocked Loose", "Motionless In White", "$NOT", "Of Mice & Men", "The Plot In You", "Riff Raff", "Sleeping With Sirens", "Sueco", "Underoath", "We Came As Romans"];
+const TIER3 = ["The Amity Affliction", "Asleep At The Wheel", "Attila", "Breathe Carolina", "Chelsea Grin", "Chiodos", "Currents", "Dance Gavin Dance", "Emmure", "Hail The Sun", "I See Stars", "Landon Tewers", "Lil Aaron", "Miss May I", "Mod Sun", "Northlane", "Saosin", "The Sometimes Island", "Sylar", "Volumes", "Whitechapel"];
+const TIER4 = ["2x4", "Abandon All Ships", "The Air I Breathe", "As Cities Burn", "Ben Baxter", "Boondock", "Crucible", "Drew Fish Band", "For All Those Sleeping", "For Today", "Icarus The Owl", "I Married The Prom Queen", "In Fear And Faith", "InkMonstarr", "I Set My Friends On Fire", "iwrestledabearonce", "Lil Milez", "Mickey Munday", "Myke Terry", "Reckless Kelly", "Sworn In", "Woe, Is Me", "Y2", "Young Milli"];
 const ARTISTS = TIER1.map(n => ({ name: n, tier: 1 }))
   .concat(TIER2.map(n => ({ name: n, tier: 2 })))
   .concat(TIER3.map(n => ({ name: n, tier: 3 })))
   .concat(TIER4.map(n => ({ name: n, tier: 4 })));
 const BF = "?c=1idGQpxiWNAd26rB-lO";
 const bfLogo = domain => "https://cdn.brandfetch.io/domain/" + domain + "/h/88/theme/light/fallback/404/type/logo" + BF;
-const local = id => "assets/logos/labels/" + id + ".png";
+const local = id => "assets/logos/label/" + id + ".png";
 const LABELS = [
   { name: "Atlantic Records", id: "atlantic", logo: local("atlantic") },
   { name: "Warner Bros. Records", id: "warner-bros", logo: local("warner-bros") },
-  { name: "Sony Music", id: "sony", logo: local("sony-white") },
+  { name: "Sony Music", id: "sony", logo: local("sony") },
   { name: "Fearless Records", id: "fearless", logo: local("fearless") },
   { name: "Rise Records", id: "rise", logo: local("rise") },
   { name: "Hopeless Records", id: "hopeless", logo: local("hopeless") },
@@ -268,39 +265,51 @@ const LABELS = [
   { name: "Blue Swan Records", id: "blue-swan", logo: local("blue-swan") },
   { name: "Nuclear Blast", id: "nuclear-blast", logo: local("nuclear-blast") },
   { name: "Clover Music Group", id: "clover", logo: local("clover") },
-  { name: "S.L.A.B. Ent.", id: "slab", logo: local("slab") }
+  { name: "S.L.A.B. Ent.", id: "slab", logo: local("slab") },
+  { name: "Velocity Records", id: "velocity", logo: local("velocity") }
 ];
 const COUNTRIES = [
-  { region: "Americas", list: ["United States", "Canada", "Mexico", "Belize", "Bahamas", "St. Lucia", "Brazil"] },
-  { region: "Europe", list: ["United Kingdom", "France", "Belgium", "Netherlands", "Luxembourg", "Germany", "Switzerland", "Austria", "Czech Republic", "Poland", "Hungary", "Italy", "Spain", "Romania"] },
-  { region: "Middle East & Asia", list: ["Turkey", "United Arab Emirates", "Qatar", "Armenia", "Kazakhstan", "Uzbekistan"] },
-  { region: "Africa", list: ["Egypt", "South Africa", "Botswana", "Namibia", "Zimbabwe", "Zambia", "Tanzania"] }
+  { region: "Americas", list: ["Bahamas", "Belize", "Brazil", "Canada", "Mexico", "St. Lucia", "United States of America"] },
+  { region: "Europe", list: ["Austria", "Belgium", "Czech Republic", "England", "France", "Germany", "Hungary", "Italy", "Luxembourg", "Netherlands", "Poland", "Romania", "Scotland", "Spain", "Switzerland", "The Vatican"] },
+  { region: "Middle East & Asia", list: ["Armenia", "Kazakhstan", "Qatar", "Turkey", "United Arab Emirates", "Uzbekistan"] },
+  { region: "Africa", list: ["Botswana", "Egypt", "Namibia", "Rwanda", "South Africa", "Tanzania", "Zambia", "Zimbabwe"] }
 ];
-const featLocal = id => "assets/logos/featured-on/" + id;
+const MAP_KEY = {
+  "United States of America": "united states of america",
+  "Czech Republic": "czechia",
+  "St. Lucia": "saint lucia",
+  "England": "united kingdom",
+  "Scotland": "united kingdom",
+  "The Vatican": "vatican"
+};
+const mapKey = n => MAP_KEY[n] || n.toLowerCase();
+const featLocal = id => "assets/logos/seen/" + id;
 const FEATURED = [
-  { name: "MTV", id: "mtv", logo: featLocal("mtv-m.png") },
-  { name: "CMT", id: "cmt", logo: null },
+  { name: "MTV", id: "mtv", logo: featLocal("mtv.png") },
+  { name: "CMT", id: "cmt", logo: featLocal("cmt.png"), wide: 0.9 },
   { name: "NBC", id: "nbc", logo: bfLogo("nbc.com") },
-  { name: "FOX", id: "fox", logo: featLocal("fox.png") },
-  { name: "CBS", id: "cbs", logo: featLocal("cbs-white.png") },
-  { name: "TODAY", id: "today", logo: featLocal("today-white.png") },
-  { name: "CNN", id: "cnn", logo: featLocal("cnn-white.png") },
-  { name: "Entertainment Tonight", id: "et", logo: null },
+  { name: "FOX", id: "fox", logo: featLocal("fox2.png") },
+  { name: "CBS", id: "cbs", logo: featLocal("cbs.png") },
+  { name: "TODAY", id: "today", logo: featLocal("today.png") },
+  { name: "CNN", id: "cnn", logo: featLocal("cnn.png") },
+  { name: "Entertainment Tonight", id: "et", logo: featLocal("et2.png") },
   { name: "Access Hollywood", id: "access-hollywood", logo: featLocal("access-hollywood.png") },
-  { name: "WorldStarHipHop", id: "worldstar", logo: bfLogo("worldstarhiphop.com") },
-  { name: "Pluto TV", id: "pluto-tv", logo: featLocal("pluto-white.png") },
-  { name: "Prime Video", id: "prime", logo: featLocal("prime.png") },
+  { name: "WorldStarHipHop", id: "worldstar", logo: featLocal("worldstar.png"), wide: 0.95 },
+  { name: "Pluto TV", id: "pluto-tv", logo: featLocal("pluto.png") },
+  { name: "Prime Video", id: "prime", logo: featLocal("prime2.png") },
   { name: "Apple TV", id: "apple-tv", logo: featLocal("apple-tv.png") },
-  { name: "Alternative Press", id: "ap", logo: featLocal("ap-white.png") },
+  { name: "Alternative Press", id: "ap", logo: featLocal("ap.png"), wide: 2.05 },
+  { name: "People", id: "people", logo: featLocal("people.png") },
+  { name: "TMZ", id: "tmz", logo: featLocal("tmz.png"), wide: 1.15 },
   { name: "SXSW Film Festival", id: "sxsw", logo: bfLogo("sxsw.com") },
-  { name: "Playboy", id: "playboy", logo: featLocal("playboy-w2.png") }
+  { name: "Playboy", id: "playboy", logo: featLocal("playboy.png") }
 ];
 const ANTON = "Anton,'Schibsted Grotesk',system-ui,sans-serif";
 const GROTESK = "'Schibsted Grotesk',system-ui,sans-serif";
 const TIER_STYLE = {
-  1: { fontFamily: ANTON, fontWeight: 400, fontSize: "clamp(34px,5vw,78px)", letterSpacing: "0", lineHeight: ".94", textColor: "#f2f2f0", colGap: "clamp(14px,1.5vw,26px)", rowGap: "clamp(4px,.6vw,10px)" },
-  2: { fontFamily: ANTON, fontWeight: 400, fontSize: "clamp(22px,3.1vw,48px)", letterSpacing: "0", lineHeight: ".98", textColor: "rgba(242,242,240,.94)", colGap: "clamp(12px,1.3vw,22px)", rowGap: "clamp(3px,.5vw,8px)" },
-  3: { fontFamily: GROTESK, fontWeight: 600, fontSize: "clamp(14px,1.55vw,21px)", letterSpacing: ".05em", lineHeight: "1.3", textColor: "rgba(242,242,240,.74)", colGap: "clamp(10px,1.1vw,18px)", rowGap: "6px" },
+  1: { fontFamily: ANTON, fontWeight: 400, fontSize: "clamp(23px,5vw,78px)", letterSpacing: "0", lineHeight: ".94", textColor: "#f2f2f0", colGap: "clamp(14px,1.5vw,26px)", rowGap: "clamp(4px,.6vw,10px)" },
+  2: { fontFamily: ANTON, fontWeight: 400, fontSize: "clamp(16px,3.1vw,48px)", letterSpacing: "0", lineHeight: ".98", textColor: "rgba(242,242,240,.94)", colGap: "clamp(12px,1.3vw,22px)", rowGap: "clamp(3px,.5vw,8px)" },
+  3: { fontFamily: GROTESK, fontWeight: 600, fontSize: "clamp(12px,1.55vw,21px)", letterSpacing: ".05em", lineHeight: "1.3", textColor: "rgba(242,242,240,.74)", colGap: "clamp(10px,1.1vw,18px)", rowGap: "6px" },
   4: { fontFamily: GROTESK, fontWeight: 500, fontSize: "clamp(10px,1vw,13px)", letterSpacing: ".14em", lineHeight: "1.4", textColor: "rgba(242,242,240,.5)", colGap: "clamp(8px,.85vw,14px)", rowGap: "5px" }
 };
 const PAUSE_D = "M7 5h3.2v14H7zM13.8 5H17v14h-3.2z";
@@ -313,14 +322,25 @@ const slideWindow = (arr, size, idx) => {
 };
 
 class Component extends DCLogic {
-  state = { playing: true, volume: 0, hovering: false, active: null, hover: null, labelIdx: 0, featuredIdx: 0 };
+  state = { playing: true, volume: 0, hovering: false, active: null, hover: null, labelIdx: 0, featuredIdx: 0, touch: false };
   heroRef = React.createRef();
+  mapRef = React.createRef();
   playerBox = React.createRef();
   lastVolume = 0.7;
 
   componentDidMount() {
     if (window.Vimeo && this.heroRef.current) {
       this.api = new window.Vimeo.Player(this.heroRef.current);
+      const kick = () => {
+        if (!this.api) return;
+        this.api.setMuted(true).catch(() => {});
+        this.api.play().catch(() => {});
+      };
+      this.api.ready().then(kick).catch(() => {});
+      this.kick = () => { kick(); document.removeEventListener("touchstart", this.kick); document.removeEventListener("click", this.kick); };
+      document.addEventListener("touchstart", this.kick, { passive: true, once: true });
+      document.addEventListener("click", this.kick, { once: true });
+      this.api.on("pause", () => { if (this.state.playing) kick(); });
     }
     const box = this.playerBox.current;
     if (box) {
@@ -339,14 +359,31 @@ class Component extends DCLogic {
     sweep();
     this.sweepTimers = [setTimeout(sweep, 800), setTimeout(sweep, 2500)];
     this.probeLogos();
+    this.onMapMsg = e => {
+      const msg = e.data || {};
+      if (msg.type === "map-hover") this.setState({ geoHover: msg.key || null });
+    };
+    window.addEventListener("message", this.onMapMsg);
+    const mq = window.matchMedia ? window.matchMedia("(hover:none),(max-width:820px)") : null;
+    if (mq) {
+      this.setState({ touch: mq.matches });
+      this.onMq = e => this.setState({ touch: e.matches });
+      mq.addEventListener ? mq.addEventListener("change", this.onMq) : mq.addListener(this.onMq);
+      this.mq = mq;
+    }
     this.rotateTimer = setInterval(() => {
       this.setState(s => ({ labelIdx: s.labelIdx + 1, featuredIdx: s.featuredIdx - 1 }));
     }, 3000);
   }
   componentWillUnmount() {
     document.removeEventListener("keydown", this.onKey);
+    window.removeEventListener("message", this.onMapMsg);
     (this.sweepTimers || []).forEach(clearTimeout);
     clearInterval(this.rotateTimer);
+  }
+  tellMap(key) {
+    const frame = this.mapRef.current;
+    if (frame && frame.contentWindow) frame.contentWindow.postMessage({ type: "map-highlight", key: key }, "*");
   }
   creditSlot(item, size) {
     const c = this.credit(item, size);
@@ -401,7 +438,7 @@ class Component extends DCLogic {
       logoOpacity: ratio ? 1 : 0,
       showText: !ratio,
       logoH: size + "px",
-      logoW: ratio ? Math.round(Math.min(size * 5, size * ratio)) + "px" : "auto"
+      logoW: Math.round(size * 2.5 * (item.wide || 1)) + "px"
     };
   }
 
@@ -425,6 +462,7 @@ class Component extends DCLogic {
       asText: (this.props.creditsStyle ?? "Logos") !== "Logos",
       gridColumns: "repeat(3,1fr)",
       metaColumns: "repeat(auto-fit,minmax(min(100%,260px),1fr))",
+      mapColumns: this.state.touch ? "minmax(0,1fr)" : "minmax(0,1.55fr) minmax(0,1fr)",
       controlsOpacity: hovering || touch ? 1 : 0,
       playPath: playing ? PAUSE_D : PLAY_D,
       playLabel: playing ? "Pause reel" : "Play reel",
@@ -452,13 +490,16 @@ class Component extends DCLogic {
       },
       videos: VIDEOS.map((vi, i) => {
         const on = this.state.hover === i;
-        const brightOff = vi.brightOff || 1;
+        const isTouch = this.state.touch;
+        const rest = isTouch && !on;
+        const brightOff = (vi.brightOff || 1) * 1.16;
+        const contrastOff = vi.contrastOff || 1.06;
         const brightOn = vi.brightOn || 1;
         return {
           artist: vi.artist,
           title: vi.title,
           credit: vi.credit || "",
-          hasCredit: !!vi.credit,
+
           capAlign: "center",
           capText: "center",
           capTop: "auto",
@@ -467,12 +508,18 @@ class Component extends DCLogic {
           subColor: "rgba(242,242,240,.82)",
           thumb: vi.cover || ("https://img.youtube.com/vi/" + vi.yt + "/" + (vi.thumbQuality || "maxresdefault") + ".jpg" + (vi.bust ? "?v=" + vi.bust : "")),
           aria: "Play " + vi.artist + " — " + vi.title,
-          filter: on ? "grayscale(0) contrast(1) brightness(" + brightOn + ")" : "grayscale(1) contrast(1.05) brightness(" + brightOff + ")",
-          imgOpacity: on ? 1 : 0.72,
-          imgScale: on ? "scale(1.075)" : "scale(1)",
-          capOpacity: on ? 1 : 0,
-          capShift: on ? "translateY(0)" : "translateY(6px)",
-          scrimOpacityFinal: on ? 1 : 0,
+          filter: on ? "grayscale(0) contrast(" + (vi.contrastOn || 1) + ") brightness(" + brightOn + ")" : "grayscale(1) contrast(" + contrastOff + ") brightness(" + brightOff + ")",
+          imgOpacity: on ? 1 : 0.84,
+          imgScale: (on ? "scale(1.075)" : "scale(1)") + (vi.flip ? " scaleX(-1)" : ""),
+          capOpacity: on || rest ? 1 : 0,
+          capShift: on || rest ? "translateY(0)" : "translateY(6px)",
+          scrimOpacityFinal: on ? 1 : (rest ? 0.62 : 0),
+          capNameSize: rest ? "12px" : "clamp(18px,1.6vw,23px)",
+          capTitleSize: rest ? "9.5px" : "clamp(13px,1.15vw,15px)",
+          capNameColor: rest ? "rgba(242,242,240,.9)" : "#f2f2f0",
+          capSubColor: rest ? "rgba(242,242,240,.62)" : "rgba(242,242,240,.82)",
+          capGap: rest ? "1px" : "3px",
+          showCredit: !!vi.credit && !rest,
           enter: () => this.setState({ hover: i }),
           leave: () => this.setState({ hover: null }),
           open: () => this.setState({ active: i, playingVideo: false })
@@ -487,7 +534,17 @@ class Component extends DCLogic {
       startVideo: () => this.setState({ playingVideo: true }),
       modalSrc: v && this.state.playingVideo ? "https://www.youtube-nocookie.com/embed/" + v.yt + "?autoplay=1&rel=0&playsinline=1&cc_load_policy=0" : "",
       modalWatch: v ? "https://www.youtube.com/watch?v=" + v.yt : "",
-      countries: COUNTRIES.map(c => ({ region: c.region, list: c.list, count: c.list.length })),
+      mapRef: this.mapRef,
+      countries: COUNTRIES.map(c => ({
+        region: c.region,
+        count: c.list.length,
+        list: c.list.map(n => ({
+          name: n,
+          color: this.state.geoHover === mapKey(n) ? "#ff5a36" : "rgba(242,242,240,.6)",
+          enter: () => { this.setState({ geoHover: mapKey(n) }); this.tellMap(mapKey(n)); },
+          leave: () => { this.setState({ geoHover: null }); this.tellMap(null); }
+        }))
+      })),
       countryTotal: COUNTRIES.reduce((n, c) => n + c.list.length, 0),
       closeModal: () => this.setState({ active: null, playingVideo: false })
     };
