@@ -234,14 +234,15 @@
 
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;creditsStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Logos&quot;,&quot;options&quot;:[&quot;Logos&quot;,&quot;Text&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Labels &amp; featured on&quot;}}">
+const MOBILE_TITLES = ["Save Me Tonight", "don't u see i'm on the phone?!", "Entertainment Lies", "Assume", "Shook!", "Okay, I'm Reloaded", "Destroy", "Dream Shade", "King of This Town", "Magical Thinking"];
 const VIDEOS = [
-  { yt: "y8HLQn3YAiw", artist: "Jennifer Lopez & David Guetta", title: "Save Me Tonight", credit: "Warner Records", cover: "assets/covers/jlo-save-me-tonight.jpg", align: "center", vpos: "top", contrastOff: 1.72, contrastOn: 1.3, brightOff: 0.8 },
-  { yt: "Gv1kmoTihz8", artist: "Chip Tha Ripper", title: "don't u see i'm on the phone?!", cover: "assets/covers/chip-dont-u-see-me-on-the-phone.jpg", contrastOff: 1.14, contrastOn: 1.04, brightOff: 0.97 },
-  { yt: "oRwLPDbkKd0", artist: "Hail The Sun", title: "Entertainment Lies", credit: "Equal Vision Records", cover: "assets/covers/hail-the-sun-ent-lies.jpg", brightOff: 1.34, brightOn: 1.02, contrastOff: 1.12, contrastOn: 1.04 },
+  { yt: "Gv1kmoTihz8", artist: "Chip Tha Ripper", title: "don't u see i'm on the phone?!", cover: "assets/covers/chip-dont-u-see-me-on-the-phone.jpg", contrastOff: 0.98, contrastOn: 0.98, brightOff: 0.88 },
+  { yt: "y8HLQn3YAiw", artist: "Jennifer Lopez & David Guetta", title: "Save Me Tonight", credit: "Warner Records", cover: "assets/covers/jlo-save-me-tonight.jpg", align: "center", vpos: "top", contrastOff: 1.78, contrastOn: 1.32, brightOff: 0.74 },
+  { yt: "oRwLPDbkKd0", artist: "Hail The Sun", title: "Entertainment Lies", credit: "Equal Vision Records", cover: "assets/covers/hail-the-sun-ent-lies.jpg", brightOff: 1.36, brightOn: 1.03, contrastOff: 0.96, contrastOn: 0.97 },
   { yt: "GVYGBuoZ5ds", artist: "Sylar", title: "Assume", credit: "Hopeless Records", align: "right", cover: "assets/covers/assume.jpg" },
   { yt: "QjBCIB0GDmA", artist: "Sylar", title: "Shook!", credit: "Hopeless Records", align: "center", cover: "assets/covers/shook.jpg" },
   { yt: "UfyiViEl2hA", artist: "Young Milli", title: "Okay, I'm Reloaded" },
-  { yt: "n8o8qANcUSc", artist: "King Chip x Fredo Santana", title: "Destroy", credit: "World Star Hip Hop Debut", cover: "assets/covers/destroy.jpg" },
+  { yt: "n8o8qANcUSc", artist: "King Chip x Fredo Santana", title: "Destroy", credit: "World Star Hip Hop Debut", cover: "assets/covers/destroy.jpg", contrastOff: 0.99, contrastOn: 0.99, brightOff: 1.04 },
   { yt: "XvPSAhjXk54", artist: "Icarus the Owl", title: "Dream Shade", credit: "Blue Swan Records", cover: "assets/covers/icarus.jpg", align: "right", contrastOff: 1.4, contrastOn: 1.15, brightOff: 0.95 },
   { yt: "S13Vh1M201E", artist: "Helen Rose", title: "King of This Town", credit: "Clover Music Group", cover: "assets/covers/helen-rose.jpg", flip: true },
   { yt: "p_qf4AS8Qyw", artist: "We Came As Romans", title: "A War Inside", credit: "Equal Vision Records", cover: "assets/covers/wcar-war.png", vpos: "top", textColor: "#0a0a0b", scrim: false },
@@ -501,7 +502,11 @@ class Component extends DCLogic {
           el.src = el.src.replace("maxresdefault", "hqdefault");
         }
       },
-      videos: VIDEOS.map((vi, i) => {
+      videos: (this.state.touch
+        ? MOBILE_TITLES.map(ti => VIDEOS.findIndex(v => v.title === ti)).filter(i => i > -1)
+        : VIDEOS.map((_, i) => i)
+      ).map(i => {
+        const vi = VIDEOS[i];
         const on = this.state.hover === i;
         const isTouch = this.state.touch;
         const brightOff = (vi.brightOff || 1) * 1.16;
