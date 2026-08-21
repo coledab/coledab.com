@@ -36,8 +36,8 @@
 
   <header style="padding:clamp(72px,11vh,128px) clamp(24px,4vw,48px) 0;display:flex;flex-direction:column;gap:clamp(20px,3vw,36px)">
     <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;max-width:1400px;width:100%;margin:0 auto">
-      <h1 style="margin:0;font-family:Fraunces,Georgia,serif;font-weight:500;font-size:clamp(32px,5.4vw,76px);letter-spacing:-.035em;line-height:.96">cole dabney</h1>
-      <p style="margin:0 0 clamp(6px,1vw,14px);font-family:Fraunces,Georgia,serif;font-weight:400;font-size:clamp(23px,2vw,29px);letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.5)">Music video director &amp; filmmaker</p>
+      <h1 style="margin:0;font-family:Fraunces,Georgia,serif;font-weight:500;font-size:clamp(32px,5.4vw,76px);letter-spacing:-.035em;line-height:.96">cole dab</h1><p style="margin: 0 0 clamp(6px,1vw,14px); font-family: Fraunces,Georgia,serif; font-weight: 400; font-size: clamp(17px,1.5vw,22px); letter-spacing: .13em; text-transform: uppercase; color: rgba(242,242,240,.5)">MUSIC VIDEO DIRECTOR</p>
+      
     </div>
     <div style="width:100%;max-width:1400px;margin:0 auto">
       <div ref="{{ playerBox }}" style="position:relative;aspect-ratio:16/9;background:#111113;overflow:hidden">
@@ -62,7 +62,8 @@
   <main>
     
 
-    <section id="work" style="max-width:1400px;margin:0 auto;padding:clamp(64px,10vh,128px) clamp(24px,4vw,48px) 0">
+    
+    <section id="work" style="max-width:1400px;margin:0 auto;padding:clamp(28px,4vh,48px) clamp(24px,4vw,48px) 0">
       <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">FEATURED DIRECTING WORK</h2>
       <ul style="margin:0;padding:clamp(24px,3vw,40px) 0 0;list-style:none;display:grid;gap:clamp(20px,2.4vw,34px);grid-template-columns:{{ gridColumns }}">
         <sc-for list="{{ videos }}" as="v" hint-placeholder-count="12">
@@ -70,12 +71,12 @@
             <button type="button" onClick="{{ v.open }}" onMouseEnter="{{ v.enter }}" onMouseLeave="{{ v.leave }}" onFocus="{{ v.enter }}" onBlur="{{ v.leave }}" aria-label="{{ v.aria }}" style="width:100%;display:block;padding:0;background:transparent;border:0;cursor:pointer;color:inherit;font:inherit;text-align:left">
               <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#141416">
                 <img src="{{ v.thumb }}" onError="{{ onThumbError }}" onLoad="{{ onThumbLoad }}" alt="" loading="lazy" style="display:block;width:100%;height:100%;object-fit:cover;filter:{{ v.filter }};opacity:{{ v.imgOpacity }};transform:{{ v.imgScale }};transition:opacity .5s cubic-bezier(.22,.61,.36,1),filter .5s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
-                <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,9,.78) 0%,rgba(8,8,9,0) 46%);opacity:{{ v.scrimOpacityFinal }};transition:opacity .4s cubic-bezier(.22,.61,.36,1);pointer-events:none"></div>
+                <div style="position: absolute; inset: 0; background: linear-gradient(to top,rgba(8,8,9,.78) 0%,rgba(8,8,9,0) 46%); opacity: {{ v.scrimOpacityFinal }}; transition: opacity .4s cubic-bezier(.22,.61,.36,1); pointer-events: none"></div>
                 <div style="position:absolute;left:clamp(12px,1.2vw,18px);right:clamp(12px,1.2vw,18px);top:{{ v.capTop }};bottom:{{ v.capBottom }};display:flex;flex-direction:column;align-items:{{ v.capAlign }};text-align:{{ v.capText }};gap:3px;opacity:{{ v.capOpacity }};transform:{{ v.capShift }};transition:opacity .4s cubic-bezier(.22,.61,.36,1),transform .45s cubic-bezier(.22,.61,.36,1);pointer-events:none">
-                  <span style="font-family:'Schibsted Grotesk',system-ui,sans-serif;font-size:clamp(18px,1.6vw,23px);font-weight:500;letter-spacing:-.02em;line-height:1.15;color:{{ v.textColor }}">{{ v.artist }}</span>
-                  <span style="font-size:clamp(13px,1.15vw,15px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:{{ v.subColor }}">{{ v.title }}</span>
+                  <span style="font-family: 'Schibsted Grotesk',system-ui,sans-serif; font-size: clamp(18px,1.6vw,23px); font-weight: 500; letter-spacing: -.02em; line-height: 1.15; color: {{ v.textColor }}; text-shadow: 0 1px 4px rgba(0,0,0,.95), 0 4px 20px rgba(0,0,0,.85)">{{ v.artist }}</span>
+                  <span style="font-size: clamp(13px,1.15vw,15px); font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: {{ v.subColor }}; text-shadow: 0 1px 4px rgba(0,0,0,.95), 0 4px 20px rgba(0,0,0,.85)">{{ v.title }}</span>
                   <sc-if value="{{ v.hasCredit }}" hint-placeholder-val="{{ false }}">
-                    <span style="font-family:Fraunces,Georgia,serif;font-style:italic;font-size:clamp(12px,1.05vw,14px);font-weight:400;letter-spacing:0;color:{{ v.subColor }}">{{ v.credit }}</span>
+                    <span style="font-family: Fraunces,Georgia,serif; font-style: italic; font-size: clamp(12px,1.05vw,14px); font-weight: 400; letter-spacing: 0; color: {{ v.subColor }}; text-shadow: 0 1px 4px rgba(0,0,0,.95), 0 4px 20px rgba(0,0,0,.85)">{{ v.credit }}</span>
                   </sc-if>
                 </div>
               </div>
@@ -83,8 +84,7 @@
           </li>
         </sc-for>
       </ul>
-    </section>
-    <section style="max-width:1400px;margin:0 auto;padding:clamp(64px,10vh,124px) clamp(24px,4vw,48px) 0">
+    </section><section style="max-width:1400px;margin:0 auto;padding:clamp(64px,10vh,124px) clamp(24px,4vw,48px) 0">
       <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">Artists filmed</h2>
       <div style="padding:clamp(22px,2.6vw,34px) 0 0;display:flex;flex-direction:column">
         <sc-for list="{{ tierGroups }}" as="g" hint-placeholder-count="4">
@@ -101,11 +101,11 @@
       <div>
         <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">Labels</h2>
         <sc-if value="{{ asLogos }}" hint-placeholder-val="{{ true }}">
-          <ul style="margin:0;padding:clamp(24px,2.8vw,38px) 0 0;list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(28px,3.2vw,46px) clamp(32px,3.6vw,52px)">
+          <ul style="margin:0;padding:clamp(24px,2.8vw,38px) 0 0;list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(28px,3.2vw,46px) clamp(32px,3.6vw,52px);opacity:{{ rotateOpacity }};transition:opacity .5s cubic-bezier(.22,.61,.36,1)">
             <sc-for list="{{ labels }}" as="l" hint-placeholder-count="12">
               <li style="position:relative;display:flex;align-items:center;justify-content:center;width:{{ l.logoW }};height:{{ l.logoH }};opacity:.9;transition:opacity .3s cubic-bezier(.22,.61,.36,1)" style-hover="opacity:1">
-                <sc-if value="{{ l.showLogo }}" hint-placeholder-val="{{ false }}">
-                  <img src="{{ l.colorSrc }}" alt="{{ l.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">
+                <sc-if value="{{ l.hasLogo }}" hint-placeholder-val="{{ false }}">
+                  <img src="{{ l.logoSrc }}" alt="{{ l.name }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: {{ l.logoOpacity }}; transition: opacity .3s">
                 </sc-if>
                 <sc-if value="{{ l.showText }}" hint-placeholder-val="{{ true }}">
                   <span style="font-size:clamp(14px,1.4vw,17px);font-weight:500;letter-spacing:-.005em;line-height:1.2;color:rgba(242,242,240,.72)">{{ l.name }}</span>
@@ -125,11 +125,11 @@
       <div>
         <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">As seen on</h2>
         <sc-if value="{{ asLogos }}" hint-placeholder-val="{{ true }}">
-          <ul style="margin:0;padding:clamp(24px,2.8vw,38px) 0 0;list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(26px,3vw,44px) clamp(30px,3.4vw,50px)">
+          <ul style="margin:0;padding:clamp(24px,2.8vw,38px) 0 0;list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(26px,3vw,44px) clamp(30px,3.4vw,50px);opacity:{{ rotateOpacity }};transition:opacity .5s cubic-bezier(.22,.61,.36,1)">
             <sc-for list="{{ featured }}" as="f" hint-placeholder-count="10">
               <li style="position:relative;display:flex;align-items:center;justify-content:center;width:{{ f.logoW }};height:{{ f.logoH }};opacity:.9;transition:opacity .3s cubic-bezier(.22,.61,.36,1)" style-hover="opacity:1">
-                <sc-if value="{{ f.showLogo }}" hint-placeholder-val="{{ false }}">
-                  <img src="{{ f.colorSrc }}" alt="{{ f.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">
+                <sc-if value="{{ f.hasLogo }}" hint-placeholder-val="{{ false }}">
+                  <img src="{{ f.logoSrc }}" alt="{{ f.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:brightness(0) invert(1);opacity:{{ f.logoOpacity }};transition:opacity .3s">
                 </sc-if>
                 <sc-if value="{{ f.showText }}" hint-placeholder-val="{{ true }}">
                   <span style="font-size:clamp(14px,1.4vw,17px);font-weight:500;letter-spacing:-.005em;line-height:1.2;color:rgba(242,242,240,.72)">{{ f.name }}</span>
@@ -148,35 +148,32 @@
       </div>
     </section>
 
-    <section aria-label="About" style="max-width:1400px;margin:0 auto;padding:clamp(64px,9vh,110px) clamp(24px,4vw,48px) 0;display:grid;gap:clamp(32px,4vw,64px);grid-template-columns:{{ metaColumns }};align-items:start">
-      <div>
+    <section aria-label="About" style="max-width:1400px;margin:0 auto;padding:clamp(64px,9vh,110px) clamp(24px,4vw,48px) 0;display:grid;gap:clamp(32px,4vw,64px);grid-template-columns:{{ metaColumns }};align-items:stretch">
+      <div style="display:flex;flex-direction:column">
         <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">Bio</h2>
-        <div style="padding:clamp(24px,2.8vw,38px) 0 0;display:flex;flex-direction:column;gap:1.15em;font-family:'Schibsted Grotesk',system-ui,sans-serif;font-weight:400;font-size:clamp(17px,1.7vw,21px);line-height:1.65;letter-spacing:-.005em;color:rgba(242,242,240,.72)">
+        <div style="padding:clamp(10px,1.2vw,16px) 0 0;flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:1.15em;font-family:'Schibsted Grotesk',system-ui,sans-serif;font-weight:400;font-size:clamp(15px,1.55vw,19px);line-height:1.6;letter-spacing:-.005em;color:rgba(242,242,240,.72)">
           <p style="margin:0;text-indent:0"><strong style="font-weight:600;color:#f2f2f0">Cole Dabney</strong> started in the hardcore scene, shooting bands from the pit at <strong style="font-weight:600;color:#f2f2f0">Warped Tour</strong> before there was a barricade. He's since become a favorite director across genres — from country artists in the hayfields to pop stars in the big city.</p>
           <p style="margin:0;text-indent:0">That range led him to become <strong style="font-weight:600;color:#f2f2f0">Jennifer Lopez</strong>'s go-to videographer, traveling with her around the world on tours and to award shows, festivals like <strong style="font-weight:600;color:#f2f2f0">Coachella</strong>, and <strong style="font-weight:600;color:#f2f2f0">Netflix</strong> film sets. His most recent music video, "Save Me Tonight" from J.Lo and <strong style="font-weight:600;color:#f2f2f0">David Guetta</strong>, was released through <strong style="font-weight:600;color:#f2f2f0">Warner Records</strong>.</p>
           <p style="margin:0;text-indent:0">Cole's debut feature film as producer, COTTON CANDY BUBBLE GUM, premiered at the <strong style="font-weight:600;color:#f2f2f0">SXSW Film Festival</strong> and was acquired by <strong style="font-weight:600;color:#f2f2f0">Shout! Factory</strong> for worldwide distribution after winning Best Comedy at the Hollywood Film Festival.</p>
         </div>
       </div>
-      <div>
-        <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">{{ countryTotal }} Countries Filmed In</h2>
-        <div style="padding:clamp(24px,2.8vw,38px) 0 0;display:flex;align-items:center;min-height:clamp(340px,36vw,480px)">
+      <div style="display:flex;flex-direction:column">
+        <h2 style="margin: 0; font-size: clamp(22px,1.95vw,27px); font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: rgba(242,242,240,.46); padding-bottom: 20px; border-bottom: 1px solid rgba(242,242,240,.14); line-height: 1.2">{{ countryTotal }} Countries Across 5 Continents</h2>
+        <div style="padding:clamp(16px,2vw,26px) 0 0;display:flex;align-items:center">
           <iframe src="filmed-in-map.html" title="Map of countries filmed in" loading="lazy" style="width:100%;aspect-ratio:900/461;border:0;display:block;background:#0a0a0b"></iframe>
         </div>
-      </div>
-    </section>
-
-    <section style="max-width:1400px;margin:0 auto;padding:clamp(40px,5vh,64px) clamp(24px,4vw,48px) 0">
-      <div style="display:flex;flex-direction:column;gap:clamp(14px,1.6vw,20px)">
-        <sc-for list="{{ countries }}" as="c" hint-placeholder-count="5">
-          <div style="display:grid;gap:6px 28px;grid-template-columns:minmax(0,1fr);align-items:baseline">
-            <h3 style="margin:0;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(242,242,240,.34)">{{ c.region }}</h3>
-            <ul style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px clamp(14px,1.5vw,22px);font-family:'Schibsted Grotesk',system-ui,sans-serif;font-weight:500;font-size:clamp(14px,1.4vw,17px);line-height:1.3;letter-spacing:-.01em;color:rgba(242,242,240,.62)">
-              <sc-for list="{{ c.list }}" as="n" hint-placeholder-count="6">
-                <li>{{ n }}</li>
-              </sc-for>
-            </ul>
-          </div>
-        </sc-for>
+        <div style="padding:clamp(14px,1.8vw,22px) 0 0;flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:8px">
+          <sc-for list="{{ countries }}" as="c" hint-placeholder-count="4">
+            <div style="display:grid;gap:4px 20px;grid-template-columns:minmax(0,1fr);align-items:baseline">
+              <h3 style="margin:0;font-size:9px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(242,242,240,.34)">{{ c.region }}</h3>
+              <ul style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:4px 12px;font-family:'Schibsted Grotesk',system-ui,sans-serif;font-weight:500;font-size:clamp(15px,1.55vw,19px);line-height:1.3;letter-spacing:-.01em;color:rgba(242,242,240,.6)">
+                <sc-for list="{{ c.list }}" as="n" hint-placeholder-count="6">
+                  <li>{{ n }}</li>
+                </sc-for>
+              </ul>
+            </div>
+          </sc-for>
+        </div>
       </div>
     </section>
 
@@ -227,7 +224,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;creditsStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Logos&quot;,&quot;options&quot;:[&quot;Logos&quot;,&quot;Text&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Labels &amp; featured on&quot;}}">
 const VIDEOS = [
-  { yt: "y8HLQn3YAiw", artist: "Jennifer Lopez & David Guetta", title: "Save Me Tonight", credit: "Warner Records", cover: "assets/covers/jlo-save-me-tonight.jpg" },
+  { yt: "y8HLQn3YAiw", artist: "Jennifer Lopez & David Guetta", title: "Save Me Tonight", credit: "Warner Records", cover: "assets/covers/jlo-save-me-tonight.jpg", align: "center", vpos: "top" },
   { yt: "Gv1kmoTihz8", artist: "Chip Tha Ripper", title: "don't u see i'm on the phone?!", cover: "assets/covers/chip-dont-u-see-me-on-the-phone.jpg" },
   { yt: "oRwLPDbkKd0", artist: "Hail The Sun", title: "Entertainment Lies", credit: "Equal Vision Records", cover: "assets/covers/hail-the-sun-ent-lies.jpg", brightOff: 1.9, brightOn: 1.15 },
   { yt: "GVYGBuoZ5ds", artist: "Sylar", title: "Assume", credit: "Hopeless Records", align: "right", cover: "assets/covers/assume.jpg" },
@@ -238,10 +235,10 @@ const VIDEOS = [
   { yt: "S13Vh1M201E", artist: "Helen Rose", title: "King of This Town", credit: "Clover Music Group", cover: "assets/covers/helen-rose.jpg" },
   { yt: "p_qf4AS8Qyw", artist: "We Came As Romans", title: "A War Inside", credit: "Equal Vision Records", cover: "assets/covers/wcar-war.png", vpos: "top", textColor: "#0a0a0b", scrim: false },
   { yt: "UfyiViEl2hA", artist: "Young Milli", title: "Okay, I'm Reloaded" },
-  { yt: "GQZryuPliQ0", artist: "Hail The Sun", title: "Relax / Divide", credit: "Blue Swan Records", cover: "assets/covers/relax-divide.png" },
+  { yt: "GQZryuPliQ0", artist: "Hail The Sun", title: "Relax / Divide", credit: "Blue Swan Records", cover: "assets/covers/relax-divide.png", align: "right" },
   { yt: "G5hDwJ3_Uc8", artist: "Of Mice & Men", title: "Second & Sebring", credit: "Rise Records", cover: "assets/covers/of-mice-and-men.png" },
-  { yt: "A1217ckwc_E", artist: "Drew Fish Band", title: "Small Price to Pay", credit: "CMT Exclusive Premiere", cover: "assets/covers/drew-fish-small-price.png", vpos: "top" },
-  { yt: "OyScIOIjfMI", artist: "Crucible", title: "Crucible x The Plot In You", cover: "assets/covers/crucible.jpg", brightOff: 1.25, brightOn: 1.15 }
+  { yt: "A1217ckwc_E", artist: "Drew Fish Band", title: "Small Price to Pay", credit: "CMT Exclusive Premiere", cover: "assets/covers/drew-fish-small-price.png", align: "right" },
+  { yt: "OyScIOIjfMI", artist: "Crucible x The Plot In You", title: "Slave to the Dime", cover: "assets/covers/crucible.jpg", brightOff: 1.25, brightOn: 1.15, align: "center", vpos: "bottom" }
 ];
 const TIER1 = ["Jennifer Lopez", "David Guetta", "Skrillex", "Kid Cudi", "Chip Tha Ripper", "2 Chainz", "Juicy J", "Rae Sremmurd", "Swae Lee", "Macklemore", "A Day To Remember", "Pierce The Veil", "All Time Low"];
 const TIER2 = ["Asking Alexandria", "Beartooth", "Hunter Hayes", "Joe Nichols", "King Chip", "Knocked Loose", "Motionless In White", "Of Mice & Men", "Sleeping With Sirens", "$NOT", "Sueco", "The Devil Wears Prada", "The Plot In You", "Underoath", "We Came As Romans"];
@@ -287,23 +284,29 @@ const FEATURED = [
   { name: "CBS", id: "cbs", logo: featLocal("cbs.png") },
   { name: "TODAY", id: "today", logo: featLocal("today.svg") },
   { name: "CNN", id: "cnn", logo: featLocal("cnn.svg") },
-  { name: "Entertainment Tonight", id: "et", logo: bfLogo("etonline.com") },
+  { name: "Entertainment Tonight", id: "et", logo: null },
   { name: "Access Hollywood", id: "access-hollywood", logo: featLocal("access-hollywood.png") },
   { name: "WorldStarHipHop", id: "worldstar", logo: bfLogo("worldstarhiphop.com") },
   { name: "Pluto TV", id: "pluto-tv", logo: featLocal("pluto-tv.png") },
   { name: "Prime Video", id: "prime", logo: featLocal("prime.png") },
   { name: "Apple TV", id: "apple-tv", logo: featLocal("apple-tv.png") },
   { name: "Alternative Press", id: "ap", logo: featLocal("ap.png") },
-  { name: "SXSW Film Festival", id: "sxsw", logo: bfLogo("sxsw.com") }
+  { name: "SXSW Film Festival", id: "sxsw", logo: bfLogo("sxsw.com") },
+  { name: "Playboy", id: "playboy", logo: featLocal("playboy-white.png") }
 ];
-const TIER_SIZE = { 1: "clamp(30px,4vw,48px)", 2: "clamp(22px,2.9vw,35px)", 3: "clamp(17px,2.1vw,26px)", 4: "clamp(14px,1.6vw,18px)" };
+const TIER_SIZE = { 1: "clamp(24px,3.15vw,38px)", 2: "clamp(22px,2.9vw,35px)", 3: "clamp(17px,2.1vw,26px)", 4: "clamp(11px,1.15vw,13px)" };
 const TIER_WEIGHT = { 1: 600, 2: 500, 3: 500, 4: 400 };
 const TIER_COLOR = { 1: "rgba(242,242,240,.92)", 2: "rgba(242,242,240,.76)", 3: "rgba(242,242,240,.6)", 4: "rgba(242,242,240,.46)" };
 const PAUSE_D = "M7 5h3.2v14H7zM13.8 5H17v14h-3.2z";
 const PLAY_D = "M7 4.5l12 7.5-12 7.5z";
+const slideWindow = (arr, size, idx) => {
+  const n = arr.length;
+  const start = idx % n;
+  return Array.from({ length: Math.min(size, n) }, (_, i) => arr[(start + i) % n]);
+};
 
 class Component extends DCLogic {
-  state = { playing: true, volume: 0, hovering: false, active: null, hover: null };
+  state = { playing: true, volume: 0, hovering: false, active: null, hover: null, rotateIdx: 0, rotateOpacity: 1 };
   heroRef = React.createRef();
   playerBox = React.createRef();
   lastVolume = 0.7;
@@ -329,10 +332,15 @@ class Component extends DCLogic {
     sweep();
     this.sweepTimers = [setTimeout(sweep, 800), setTimeout(sweep, 2500)];
     this.probeLogos();
+    this.rotateTimer = setInterval(() => {
+      this.setState({ rotateOpacity: 0 });
+      setTimeout(() => this.setState(s => ({ rotateIdx: s.rotateIdx + 1, rotateOpacity: 1 })), 500);
+    }, 5000);
   }
   componentWillUnmount() {
     document.removeEventListener("keydown", this.onKey);
     (this.sweepTimers || []).forEach(clearTimeout);
+    clearInterval(this.rotateTimer);
   }
 
   setVolume(v) {
@@ -377,9 +385,10 @@ class Component extends DCLogic {
     const ratio = (this.state.logoOk || {})[item.id];
     return {
       name: item.name,
-      showLogo: !!ratio,
+      hasLogo: !!item.logo,
+      logoSrc: item.logo || "",
+      logoOpacity: ratio ? 1 : 0,
       showText: !ratio,
-      colorSrc: item.logo,
       logoH: size + "px",
       logoW: ratio ? Math.round(Math.min(size * 5, size * ratio)) + "px" : "0px"
     };
@@ -402,8 +411,9 @@ class Component extends DCLogic {
           textColor: TIER_COLOR[t]
         }))
       })),
-      labels: LABELS.map(l => this.credit(l, 72)),
-      featured: FEATURED.map(f => this.credit(f, 58)),
+      labels: slideWindow(LABELS, 6, this.state.rotateIdx).map(l => this.credit(l, 60)),
+      rotateOpacity: this.state.rotateOpacity,
+      featured: slideWindow(FEATURED, 6, this.state.rotateIdx).map(f => this.credit(f, 58)),
       asLogos: (this.props.creditsStyle ?? "Logos") === "Logos",
       asText: (this.props.creditsStyle ?? "Logos") !== "Logos",
       gridColumns: "repeat(3,1fr)",
@@ -435,8 +445,6 @@ class Component extends DCLogic {
       },
       videos: VIDEOS.map((vi, i) => {
         const on = this.state.hover === i;
-        const align = vi.align || "left";
-        const vpos = vi.vpos || "bottom";
         const brightOff = vi.brightOff || 1;
         const brightOn = vi.brightOn || 1;
         return {
@@ -444,12 +452,12 @@ class Component extends DCLogic {
           title: vi.title,
           credit: vi.credit || "",
           hasCredit: !!vi.credit,
-          capAlign: align === "right" ? "flex-end" : align === "center" ? "center" : "flex-start",
-          capText: align,
-          capTop: vpos === "top" ? "clamp(11px,1.1vw,16px)" : "auto",
-          capBottom: vpos === "top" ? "auto" : "clamp(11px,1.1vw,16px)",
-          textColor: vi.textColor || "#f2f2f0",
-          subColor: vi.textColor ? vi.textColor : "rgba(242,242,240,.72)",
+          capAlign: "center",
+          capText: "center",
+          capTop: "auto",
+          capBottom: "clamp(11px,1.1vw,16px)",
+          textColor: "#f2f2f0",
+          subColor: "rgba(242,242,240,.82)",
           thumb: vi.cover || ("https://img.youtube.com/vi/" + vi.yt + "/" + (vi.thumbQuality || "maxresdefault") + ".jpg" + (vi.bust ? "?v=" + vi.bust : "")),
           aria: "Play " + vi.artist + " — " + vi.title,
           filter: on ? "grayscale(0) contrast(1) brightness(" + brightOn + ")" : "grayscale(1) contrast(1.05) brightness(" + brightOff + ")",
@@ -457,7 +465,7 @@ class Component extends DCLogic {
           imgScale: on ? "scale(1.03)" : "scale(1)",
           capOpacity: on ? 1 : 0,
           capShift: on ? "translateY(0)" : "translateY(6px)",
-          scrimOpacityFinal: (vi.scrim === false ? 0 : (on ? 1 : 0)),
+          scrimOpacityFinal: on ? 1 : 0,
           enter: () => this.setState({ hover: i }),
           leave: () => this.setState({ hover: null }),
           open: () => this.setState({ active: i, playingVideo: false })

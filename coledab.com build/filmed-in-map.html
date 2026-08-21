@@ -49,7 +49,7 @@ const displayName = raw => DISPLAY_NAME[key(raw)] || raw;
 
 const W = 900, H = 461;
 // West edge clears Alaska mainland; east edge clears Kazakhstan; south edge clears Tierra del Fuego.
-const CROP = { type: "Polygon", coordinates: [[[-168, 72], [90, 72], [90, -60], [-168, -60], [-168, 72]]] };
+const CROP = { type: "Polygon", coordinates: [[[-165, 71], [88, 71], [88, -58], [-165, -58], [-165, 71]]] };
 
 d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json").then(topo => {
   const countries = topojson.feature(topo, topo.objects.countries).features;
