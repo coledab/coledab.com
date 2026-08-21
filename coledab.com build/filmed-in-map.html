@@ -47,14 +47,18 @@ const DISPLAY_NAME = {
 };
 const displayName = raw => DISPLAY_NAME[key(raw)] || raw;
 
-const W = 900, H = 461;
 // West edge clears Alaska mainland; east edge clears Kazakhstan; south edge clears Tierra del Fuego.
-const CROP = { type: "Polygon", coordinates: [[[-165, 71], [88, 71], [88, -58], [-165, -58], [-165, 71]]] };
+const LON0 = -168, LON1 = 88, LAT0 = 72, LAT1 = -56;
+const RAD = Math.PI / 180;
+const W = 900;
+const SCALE = W / ((LON1 - LON0) * RAD);
+const H = Math.round(SCALE * (LAT0 - LAT1) * RAD);
+const TX = -SCALE * LON0 * RAD;
+const TY = SCALE * LAT0 * RAD;
 
 d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json").then(topo => {
   const countries = topojson.feature(topo, topo.objects.countries).features;
-  const projection = d3.geoEquirectangular();
-  projection.fitExtent([[8, 8], [W - 8, H - 8]], CROP);
+  const projection = d3.geoEquirectangular().scale(SCALE).translate([TX, TY]);
   projection.clipExtent([[0, 0], [W, H]]);
   const path = d3.geoPath(projection);
 

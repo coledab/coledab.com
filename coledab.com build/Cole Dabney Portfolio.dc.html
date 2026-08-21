@@ -10,7 +10,7 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Schibsted+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Schibsted+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <script src="https://player.vimeo.com/api/player.js"></script>
 <script src="./image-slot.js"></script>
 <style>
@@ -69,8 +69,8 @@
         <sc-for list="{{ videos }}" as="v" hint-placeholder-count="12">
           <li>
             <button type="button" onClick="{{ v.open }}" onMouseEnter="{{ v.enter }}" onMouseLeave="{{ v.leave }}" onFocus="{{ v.enter }}" onBlur="{{ v.leave }}" aria-label="{{ v.aria }}" style="width:100%;display:block;padding:0;background:transparent;border:0;cursor:pointer;color:inherit;font:inherit;text-align:left">
-              <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#141416">
-                <img src="{{ v.thumb }}" onError="{{ onThumbError }}" onLoad="{{ onThumbLoad }}" alt="" loading="lazy" style="display:block;width:100%;height:100%;object-fit:cover;filter:{{ v.filter }};opacity:{{ v.imgOpacity }};transform:{{ v.imgScale }};transition:opacity .5s cubic-bezier(.22,.61,.36,1),filter .5s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
+              <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#0a0a0b;transform:translateZ(0);isolation:isolate">
+                <img src="{{ v.thumb }}" onError="{{ onThumbError }}" onLoad="{{ onThumbLoad }}" alt="" loading="lazy" style="display:block;width:100.4%;height:100.4%;margin:-0.2% 0 0 -0.2%;object-fit:cover;backface-visibility:hidden;will-change:transform,filter,opacity;filter:{{ v.filter }};opacity:{{ v.imgOpacity }};transform:{{ v.imgScale }};transition:opacity .5s cubic-bezier(.22,.61,.36,1),filter .5s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)">
                 <div style="position: absolute; inset: 0; background: linear-gradient(to top,rgba(8,8,9,.78) 0%,rgba(8,8,9,0) 46%); opacity: {{ v.scrimOpacityFinal }}; transition: opacity .4s cubic-bezier(.22,.61,.36,1); pointer-events: none"></div>
                 <div style="position:absolute;left:clamp(12px,1.2vw,18px);right:clamp(12px,1.2vw,18px);top:{{ v.capTop }};bottom:{{ v.capBottom }};display:flex;flex-direction:column;align-items:{{ v.capAlign }};text-align:{{ v.capText }};gap:3px;opacity:{{ v.capOpacity }};transform:{{ v.capShift }};transition:opacity .4s cubic-bezier(.22,.61,.36,1),transform .45s cubic-bezier(.22,.61,.36,1);pointer-events:none">
                   <span style="font-family: 'Schibsted Grotesk',system-ui,sans-serif; font-size: clamp(18px,1.6vw,23px); font-weight: 500; letter-spacing: -.02em; line-height: 1.15; color: {{ v.textColor }}; text-shadow: 0 1px 4px rgba(0,0,0,.95), 0 4px 20px rgba(0,0,0,.85)">{{ v.artist }}</span>
@@ -86,11 +86,16 @@
       </ul>
     </section><section style="max-width:1400px;margin:0 auto;padding:clamp(64px,10vh,124px) clamp(24px,4vw,48px) 0">
       <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">Artists filmed</h2>
-      <div style="padding:clamp(22px,2.6vw,34px) 0 0;display:flex;flex-direction:column">
+      <div style="padding:clamp(34px,4.5vw,64px) 0 clamp(10px,1.5vw,22px);display:flex;flex-direction:column;align-items:center;gap:clamp(26px,3.4vw,48px);max-width:1180px;margin:0 auto;text-align:center">
         <sc-for list="{{ tierGroups }}" as="g" hint-placeholder-count="4">
-          <ul style="margin:0 0 clamp(18px,2.4vw,30px);padding:0;list-style:none;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px clamp(18px,2.2vw,30px);font-family:'Schibsted Grotesk',system-ui,sans-serif;letter-spacing:-.02em">
+          <ul style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;row-gap:{{ g.rowGap }};column-gap:{{ g.colGap }};font-family:{{ g.fontFamily }};font-weight:{{ g.fontWeight }};font-size:{{ g.fontSize }};letter-spacing:{{ g.letterSpacing }};line-height:{{ g.lineHeight }};text-transform:uppercase;color:{{ g.textColor }}">
             <sc-for list="{{ g.items }}" as="a" hint-placeholder-count="10">
-              <li style="font-size:{{ a.fontSize }};font-weight:{{ a.fontWeight }};color:{{ a.textColor }};line-height:1.25;transition:color .35s cubic-bezier(.22,.61,.36,1)" style-hover="color:#f2f2f0">{{ a.name }}</li>
+              <li style="display:flex;align-items:center;column-gap:{{ g.colGap }}">
+                <span style="transition:color .3s cubic-bezier(.22,.61,.36,1);cursor:default" style-hover="color:#ff5a36">{{ a.name }}</span>
+                <sc-if value="{{ a.sep }}" hint-placeholder-val="{{ true }}">
+                  <span aria-hidden="true" style="flex:none;width:5px;height:5px;background:#ff5a36;transform:rotate(45deg);opacity:.62"></span>
+                </sc-if>
+              </li>
             </sc-for>
           </ul>
         </sc-for>
@@ -101,12 +106,12 @@
       <div>
         <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">Labels</h2>
         <sc-if value="{{ asLogos }}" hint-placeholder-val="{{ true }}">
-          <ul style="margin:0;padding:clamp(24px,2.8vw,38px) 0 0;list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(28px,3.2vw,46px) clamp(32px,3.6vw,52px);opacity:{{ rotateOpacity }};transition:opacity .5s cubic-bezier(.22,.61,.36,1)">
-            <sc-for list="{{ labels }}" as="l" hint-placeholder-count="12">
-              <li style="position:relative;display:flex;align-items:center;justify-content:center;width:{{ l.logoW }};height:{{ l.logoH }};opacity:.9;transition:opacity .3s cubic-bezier(.22,.61,.36,1)" style-hover="opacity:1">
-                <img src="{{ l.logoSrc }}" alt="{{ l.name }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: {{ l.logoOpacity }}; transition: opacity .3s">
+          <ul style="margin:0;padding:clamp(24px,2.8vw,38px) 0 0;list-style:none;display:flex;align-items:center;justify-content:center;gap:clamp(40px,4.5vw,70px);overflow:hidden">
+            <sc-for list="{{ labels }}" as="l" hint-placeholder-count="0">
+              <li style="position:relative;display:flex;align-items:center;justify-content:center;width:{{ l.logoW }};height:{{ l.logoH }};opacity:{{ l.slotOpacity }};transform:scale({{ l.slotScale }});transition:opacity .5s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1)">
+                <div style="position: absolute; inset: 0; background-image: {{ l.bgLogo }}; background-size: contain; background-position: center; background-repeat: no-repeat; opacity: {{ l.logoOpacity }}; transition: opacity .3s"></div>
                 <sc-if value="{{ l.showText }}" hint-placeholder-val="{{ true }}">
-                  <span style="font-size:clamp(14px,1.4vw,17px);font-weight:500;letter-spacing:-.005em;line-height:1.2;color:rgba(242,242,240,.72)">{{ l.name }}</span>
+                  <span style="font-family:Anton,'Schibsted Grotesk',system-ui,sans-serif;font-size:clamp(19px,2vw,27px);font-weight:400;letter-spacing:.01em;line-height:1;text-transform:uppercase;white-space:nowrap;color:rgba(242,242,240,.9)">{{ l.name }}</span>
                 </sc-if>
               </li>
             </sc-for>
@@ -123,12 +128,12 @@
       <div>
         <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">As seen on</h2>
         <sc-if value="{{ asLogos }}" hint-placeholder-val="{{ true }}">
-          <ul style="margin:0;padding:clamp(24px,2.8vw,38px) 0 0;list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(26px,3vw,44px) clamp(30px,3.4vw,50px);opacity:{{ rotateOpacity }};transition:opacity .5s cubic-bezier(.22,.61,.36,1)">
-            <sc-for list="{{ featured }}" as="f" hint-placeholder-count="10">
-              <li style="position:relative;display:flex;align-items:center;justify-content:center;width:{{ f.logoW }};height:{{ f.logoH }};opacity:.9;transition:opacity .3s cubic-bezier(.22,.61,.36,1)" style-hover="opacity:1">
-                <img src="{{ f.logoSrc }}" alt="{{ f.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:brightness(0) invert(1);opacity:{{ f.logoOpacity }};transition:opacity .3s">
+          <ul style="margin:0;padding:clamp(24px,2.8vw,38px) 0 0;list-style:none;display:flex;align-items:center;justify-content:center;gap:clamp(40px,4.5vw,70px);overflow:hidden">
+            <sc-for list="{{ featured }}" as="f" hint-placeholder-count="0">
+              <li style="position:relative;display:flex;align-items:center;justify-content:center;width:{{ f.logoW }};height:{{ f.logoH }};opacity:{{ f.slotOpacity }};transform:scale({{ f.slotScale }});transition:opacity .5s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1)">
+                <div style="position:absolute;inset:0;background-image:{{ f.bgLogo }};background-size:contain;background-position:center;background-repeat:no-repeat;opacity:{{ f.logoOpacity }};transition:opacity .3s"></div>
                 <sc-if value="{{ f.showText }}" hint-placeholder-val="{{ true }}">
-                  <span style="font-size:clamp(14px,1.4vw,17px);font-weight:500;letter-spacing:-.005em;line-height:1.2;color:rgba(242,242,240,.72)">{{ f.name }}</span>
+                  <span style="font-family:Anton,'Schibsted Grotesk',system-ui,sans-serif;font-size:clamp(19px,2vw,27px);font-weight:400;letter-spacing:.01em;line-height:1;text-transform:uppercase;white-space:nowrap;color:rgba(242,242,240,.9)">{{ f.name }}</span>
                 </sc-if>
               </li>
             </sc-for>
@@ -147,7 +152,7 @@
     <section aria-label="About" style="max-width:1400px;margin:0 auto;padding:clamp(64px,9vh,110px) clamp(24px,4vw,48px) 0;display:grid;gap:clamp(32px,4vw,64px);grid-template-columns:{{ metaColumns }};align-items:stretch">
       <div style="display:flex;flex-direction:column">
         <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">Bio</h2>
-        <div style="padding:clamp(10px,1.2vw,16px) 0 0;flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:1.15em;font-family:'Schibsted Grotesk',system-ui,sans-serif;font-weight:400;font-size:clamp(15px,1.55vw,19px);line-height:1.6;letter-spacing:-.005em;color:rgba(242,242,240,.72)">
+        <div style="padding:clamp(10px,1.2vw,16px) 0 0;display:flex;flex-direction:column;gap:1.15em;font-family:'Schibsted Grotesk',system-ui,sans-serif;font-weight:400;font-size:clamp(18px,1.9vw,23px);line-height:1.62;letter-spacing:-.005em;color:rgba(242,242,240,.72)">
           <p style="margin:0;text-indent:0"><strong style="font-weight:600;color:#f2f2f0">Cole Dabney</strong> started in the hardcore scene, shooting bands from the pit at <strong style="font-weight:600;color:#f2f2f0">Warped Tour</strong> before there was a barricade. He's since become a favorite director across genres — from country artists in the hayfields to pop stars in the big city.</p>
           <p style="margin:0;text-indent:0">That range led him to become <strong style="font-weight:600;color:#f2f2f0">Jennifer Lopez</strong>'s go-to videographer, traveling with her around the world on tours and to award shows, festivals like <strong style="font-weight:600;color:#f2f2f0">Coachella</strong>, and <strong style="font-weight:600;color:#f2f2f0">Netflix</strong> film sets. His most recent music video, "Save Me Tonight" from J.Lo and <strong style="font-weight:600;color:#f2f2f0">David Guetta</strong>, was released through <strong style="font-weight:600;color:#f2f2f0">Warner Records</strong>.</p>
           <p style="margin:0;text-indent:0">Cole's debut feature film as producer, COTTON CANDY BUBBLE GUM, premiered at the <strong style="font-weight:600;color:#f2f2f0">SXSW Film Festival</strong> and was acquired by <strong style="font-weight:600;color:#f2f2f0">Shout! Factory</strong> for worldwide distribution after winning Best Comedy at the Hollywood Film Festival.</p>
@@ -156,9 +161,9 @@
       <div style="display:flex;flex-direction:column">
         <h2 style="margin: 0; font-size: clamp(22px,1.95vw,27px); font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: rgba(242,242,240,.46); padding-bottom: 20px; border-bottom: 1px solid rgba(242,242,240,.14); line-height: 1.2">{{ countryTotal }} Countries Across 5 Continents</h2>
         <div style="padding:clamp(16px,2vw,26px) 0 0;display:flex;align-items:center">
-          <iframe src="filmed-in-map.html" title="Map of countries filmed in" loading="lazy" style="width:100%;aspect-ratio:900/461;border:0;display:block;background:#0a0a0b"></iframe>
+          <iframe src="filmed-in-map.html" title="Map of countries filmed in" loading="lazy" style="width:100%;aspect-ratio:900/450;border:0;display:block;background:#0a0a0b"></iframe>
         </div>
-        <div style="padding:clamp(14px,1.8vw,22px) 0 0;flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:8px">
+        <div style="padding:clamp(14px,1.8vw,22px) 0 0;display:flex;flex-direction:column;gap:8px">
           <sc-for list="{{ countries }}" as="c" hint-placeholder-count="4">
             <div style="display:grid;gap:4px 20px;grid-template-columns:minmax(0,1fr);align-items:baseline">
               <h3 style="margin:0;font-size:9px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(242,242,240,.34)">{{ c.region }}</h3>
@@ -245,12 +250,12 @@ const ARTISTS = TIER1.map(n => ({ name: n, tier: 1 }))
   .concat(TIER3.map(n => ({ name: n, tier: 3 })))
   .concat(TIER4.map(n => ({ name: n, tier: 4 })));
 const BF = "?c=1idGQpxiWNAd26rB-lO";
-const bfLogo = domain => "https://cdn.brandfetch.io/domain/" + domain + "/h/88/theme/dark/fallback/404/type/logo" + BF;
+const bfLogo = domain => "https://cdn.brandfetch.io/domain/" + domain + "/h/88/theme/light/fallback/404/type/logo" + BF;
 const local = id => "assets/logos/labels/" + id + ".png";
 const LABELS = [
   { name: "Atlantic Records", id: "atlantic", logo: local("atlantic") },
   { name: "Warner Bros. Records", id: "warner-bros", logo: local("warner-bros") },
-  { name: "Sony Music", id: "sony", logo: local("sony") },
+  { name: "Sony Music", id: "sony", logo: local("sony-white") },
   { name: "Fearless Records", id: "fearless", logo: local("fearless") },
   { name: "Rise Records", id: "rise", logo: local("rise") },
   { name: "Hopeless Records", id: "hopeless", logo: local("hopeless") },
@@ -273,37 +278,42 @@ const COUNTRIES = [
 ];
 const featLocal = id => "assets/logos/featured-on/" + id;
 const FEATURED = [
-  { name: "MTV", id: "mtv", logo: featLocal("mtv.png") },
-  { name: "CMT", id: "cmt", logo: bfLogo("cmt.com") },
+  { name: "MTV", id: "mtv", logo: featLocal("mtv-m.png") },
+  { name: "CMT", id: "cmt", logo: null },
   { name: "NBC", id: "nbc", logo: bfLogo("nbc.com") },
   { name: "FOX", id: "fox", logo: featLocal("fox.png") },
-  { name: "CBS", id: "cbs", logo: featLocal("cbs.png") },
-  { name: "TODAY", id: "today", logo: featLocal("today.svg") },
-  { name: "CNN", id: "cnn", logo: featLocal("cnn.svg") },
+  { name: "CBS", id: "cbs", logo: featLocal("cbs-white.png") },
+  { name: "TODAY", id: "today", logo: featLocal("today-white.png") },
+  { name: "CNN", id: "cnn", logo: featLocal("cnn-white.png") },
   { name: "Entertainment Tonight", id: "et", logo: null },
   { name: "Access Hollywood", id: "access-hollywood", logo: featLocal("access-hollywood.png") },
   { name: "WorldStarHipHop", id: "worldstar", logo: bfLogo("worldstarhiphop.com") },
-  { name: "Pluto TV", id: "pluto-tv", logo: featLocal("pluto-tv.png") },
+  { name: "Pluto TV", id: "pluto-tv", logo: featLocal("pluto-white.png") },
   { name: "Prime Video", id: "prime", logo: featLocal("prime.png") },
   { name: "Apple TV", id: "apple-tv", logo: featLocal("apple-tv.png") },
-  { name: "Alternative Press", id: "ap", logo: featLocal("ap.png") },
+  { name: "Alternative Press", id: "ap", logo: featLocal("ap-white.png") },
   { name: "SXSW Film Festival", id: "sxsw", logo: bfLogo("sxsw.com") },
-  { name: "Playboy", id: "playboy", logo: featLocal("playboy-white.png") }
+  { name: "Playboy", id: "playboy", logo: featLocal("playboy-w2.png") }
 ];
-const TIER_SIZE = { 1: "clamp(24px,3.15vw,38px)", 2: "clamp(22px,2.9vw,35px)", 3: "clamp(17px,2.1vw,26px)", 4: "clamp(11px,1.15vw,13px)" };
-const TIER_WEIGHT = { 1: 600, 2: 500, 3: 500, 4: 400 };
-const TIER_COLOR = { 1: "rgba(242,242,240,.92)", 2: "rgba(242,242,240,.76)", 3: "rgba(242,242,240,.6)", 4: "rgba(242,242,240,.46)" };
+const ANTON = "Anton,'Schibsted Grotesk',system-ui,sans-serif";
+const GROTESK = "'Schibsted Grotesk',system-ui,sans-serif";
+const TIER_STYLE = {
+  1: { fontFamily: ANTON, fontWeight: 400, fontSize: "clamp(34px,5vw,78px)", letterSpacing: "0", lineHeight: ".94", textColor: "#f2f2f0", colGap: "clamp(14px,1.5vw,26px)", rowGap: "clamp(4px,.6vw,10px)" },
+  2: { fontFamily: ANTON, fontWeight: 400, fontSize: "clamp(22px,3.1vw,48px)", letterSpacing: "0", lineHeight: ".98", textColor: "rgba(242,242,240,.94)", colGap: "clamp(12px,1.3vw,22px)", rowGap: "clamp(3px,.5vw,8px)" },
+  3: { fontFamily: GROTESK, fontWeight: 600, fontSize: "clamp(14px,1.55vw,21px)", letterSpacing: ".05em", lineHeight: "1.3", textColor: "rgba(242,242,240,.74)", colGap: "clamp(10px,1.1vw,18px)", rowGap: "6px" },
+  4: { fontFamily: GROTESK, fontWeight: 500, fontSize: "clamp(10px,1vw,13px)", letterSpacing: ".14em", lineHeight: "1.4", textColor: "rgba(242,242,240,.5)", colGap: "clamp(8px,.85vw,14px)", rowGap: "5px" }
+};
 const PAUSE_D = "M7 5h3.2v14H7zM13.8 5H17v14h-3.2z";
 const PLAY_D = "M7 4.5l12 7.5-12 7.5z";
 const BLANK_PX = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 const slideWindow = (arr, size, idx) => {
   const n = arr.length;
-  const start = idx % n;
+  const start = ((idx % n) + n) % n;
   return Array.from({ length: Math.min(size, n) }, (_, i) => arr[(start + i) % n]);
 };
 
 class Component extends DCLogic {
-  state = { playing: true, volume: 0, hovering: false, active: null, hover: null, rotateIdx: 0, rotateOpacity: 1 };
+  state = { playing: true, volume: 0, hovering: false, active: null, hover: null, labelIdx: 0, featuredIdx: 0 };
   heroRef = React.createRef();
   playerBox = React.createRef();
   lastVolume = 0.7;
@@ -330,14 +340,19 @@ class Component extends DCLogic {
     this.sweepTimers = [setTimeout(sweep, 800), setTimeout(sweep, 2500)];
     this.probeLogos();
     this.rotateTimer = setInterval(() => {
-      this.setState({ rotateOpacity: 0 });
-      setTimeout(() => this.setState(s => ({ rotateIdx: s.rotateIdx + 1, rotateOpacity: 1 })), 500);
-    }, 5000);
+      this.setState(s => ({ labelIdx: s.labelIdx + 1, featuredIdx: s.featuredIdx - 1 }));
+    }, 3000);
   }
   componentWillUnmount() {
     document.removeEventListener("keydown", this.onKey);
     (this.sweepTimers || []).forEach(clearTimeout);
     clearInterval(this.rotateTimer);
+  }
+  creditSlot(item, size) {
+    const c = this.credit(item, size);
+    c.slotOpacity = 1;
+    c.slotScale = 1;
+    return c;
   }
 
   setVolume(v) {
@@ -382,11 +397,11 @@ class Component extends DCLogic {
     const ratio = (this.state.logoOk || {})[item.id];
     return {
       name: item.name,
-      logoSrc: item.logo || BLANK_PX,
+      bgLogo: "url(" + (item.logo || BLANK_PX) + ")",
       logoOpacity: ratio ? 1 : 0,
       showText: !ratio,
       logoH: size + "px",
-      logoW: ratio ? Math.round(Math.min(size * 5, size * ratio)) + "px" : "0px"
+      logoW: ratio ? Math.round(Math.min(size * 5, size * ratio)) + "px" : "auto"
     };
   }
 
@@ -398,18 +413,14 @@ class Component extends DCLogic {
       heroRef: this.heroRef,
       playerBox: this.playerBox,
       year: new Date().getFullYear(),
-      tierGroups: [1, 2, 3, 4].map(t => ({
-        tier: t,
-        items: ARTISTS.filter(a => a.tier === t).map(a => ({
-          name: a.name,
-          fontSize: TIER_SIZE[t],
-          fontWeight: TIER_WEIGHT[t],
-          textColor: TIER_COLOR[t]
-        }))
-      })),
-      labels: slideWindow(LABELS, 6, this.state.rotateIdx).map(l => this.credit(l, 60)),
-      rotateOpacity: this.state.rotateOpacity,
-      featured: slideWindow(FEATURED, 6, this.state.rotateIdx).map(f => this.credit(f, 58)),
+      tierGroups: [1, 2, 3, 4].map(t => {
+        const names = ARTISTS.filter(a => a.tier === t);
+        return Object.assign({ tier: t }, TIER_STYLE[t], {
+          items: names.map((a, i) => ({ name: a.name, sep: i < names.length - 1 }))
+        });
+      }),
+      labels: slideWindow(LABELS, 3, this.state.labelIdx).map(l => this.creditSlot(l, 72)),
+      featured: slideWindow(FEATURED, 3, this.state.featuredIdx).map(f => this.creditSlot(f, 68)),
       asLogos: (this.props.creditsStyle ?? "Logos") === "Logos",
       asText: (this.props.creditsStyle ?? "Logos") !== "Logos",
       gridColumns: "repeat(3,1fr)",
@@ -458,7 +469,7 @@ class Component extends DCLogic {
           aria: "Play " + vi.artist + " — " + vi.title,
           filter: on ? "grayscale(0) contrast(1) brightness(" + brightOn + ")" : "grayscale(1) contrast(1.05) brightness(" + brightOff + ")",
           imgOpacity: on ? 1 : 0.72,
-          imgScale: on ? "scale(1.03)" : "scale(1)",
+          imgScale: on ? "scale(1.075)" : "scale(1)",
           capOpacity: on ? 1 : 0,
           capShift: on ? "translateY(0)" : "translateY(6px)",
           scrimOpacityFinal: on ? 1 : 0,
