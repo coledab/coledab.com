@@ -104,9 +104,7 @@
           <ul style="margin:0;padding:clamp(24px,2.8vw,38px) 0 0;list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(28px,3.2vw,46px) clamp(32px,3.6vw,52px);opacity:{{ rotateOpacity }};transition:opacity .5s cubic-bezier(.22,.61,.36,1)">
             <sc-for list="{{ labels }}" as="l" hint-placeholder-count="12">
               <li style="position:relative;display:flex;align-items:center;justify-content:center;width:{{ l.logoW }};height:{{ l.logoH }};opacity:.9;transition:opacity .3s cubic-bezier(.22,.61,.36,1)" style-hover="opacity:1">
-                <sc-if value="{{ l.hasLogo }}" hint-placeholder-val="{{ false }}">
-                  <img src="{{ l.logoSrc }}" alt="{{ l.name }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: {{ l.logoOpacity }}; transition: opacity .3s">
-                </sc-if>
+                <img src="{{ l.logoSrc }}" alt="{{ l.name }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: {{ l.logoOpacity }}; transition: opacity .3s">
                 <sc-if value="{{ l.showText }}" hint-placeholder-val="{{ true }}">
                   <span style="font-size:clamp(14px,1.4vw,17px);font-weight:500;letter-spacing:-.005em;line-height:1.2;color:rgba(242,242,240,.72)">{{ l.name }}</span>
                 </sc-if>
@@ -128,9 +126,7 @@
           <ul style="margin:0;padding:clamp(24px,2.8vw,38px) 0 0;list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(26px,3vw,44px) clamp(30px,3.4vw,50px);opacity:{{ rotateOpacity }};transition:opacity .5s cubic-bezier(.22,.61,.36,1)">
             <sc-for list="{{ featured }}" as="f" hint-placeholder-count="10">
               <li style="position:relative;display:flex;align-items:center;justify-content:center;width:{{ f.logoW }};height:{{ f.logoH }};opacity:.9;transition:opacity .3s cubic-bezier(.22,.61,.36,1)" style-hover="opacity:1">
-                <sc-if value="{{ f.hasLogo }}" hint-placeholder-val="{{ false }}">
-                  <img src="{{ f.logoSrc }}" alt="{{ f.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:brightness(0) invert(1);opacity:{{ f.logoOpacity }};transition:opacity .3s">
-                </sc-if>
+                <img src="{{ f.logoSrc }}" alt="{{ f.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:brightness(0) invert(1);opacity:{{ f.logoOpacity }};transition:opacity .3s">
                 <sc-if value="{{ f.showText }}" hint-placeholder-val="{{ true }}">
                   <span style="font-size:clamp(14px,1.4vw,17px);font-weight:500;letter-spacing:-.005em;line-height:1.2;color:rgba(242,242,240,.72)">{{ f.name }}</span>
                 </sc-if>
@@ -299,6 +295,7 @@ const TIER_WEIGHT = { 1: 600, 2: 500, 3: 500, 4: 400 };
 const TIER_COLOR = { 1: "rgba(242,242,240,.92)", 2: "rgba(242,242,240,.76)", 3: "rgba(242,242,240,.6)", 4: "rgba(242,242,240,.46)" };
 const PAUSE_D = "M7 5h3.2v14H7zM13.8 5H17v14h-3.2z";
 const PLAY_D = "M7 4.5l12 7.5-12 7.5z";
+const BLANK_PX = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 const slideWindow = (arr, size, idx) => {
   const n = arr.length;
   const start = idx % n;
@@ -385,8 +382,7 @@ class Component extends DCLogic {
     const ratio = (this.state.logoOk || {})[item.id];
     return {
       name: item.name,
-      hasLogo: !!item.logo,
-      logoSrc: item.logo || "",
+      logoSrc: item.logo || BLANK_PX,
       logoOpacity: ratio ? 1 : 0,
       showText: !ratio,
       logoH: size + "px",
