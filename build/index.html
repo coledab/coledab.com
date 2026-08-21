@@ -14,11 +14,11 @@
 <script src="https://player.vimeo.com/api/player.js"></script>
 <script src="./image-slot.js"></script>
 <style>
-  /* Tagline is locked to the logotype's width at every viewport: its font-size is
-     a fixed 0.222 ratio of the logotype's (both clamps share the same 5.4vw term
-     and crossover points), which lands within ~0.6%, and justify closes the rest.
-     width:0 + min-width:100% keeps the tagline out of the column's intrinsic
-     sizing, so the column hugs the h1 and justify has real slack to distribute. */
+  /* Tagline is locked to the logotype's rendered width — the font-size below is
+     only a pre-JS fallback; the script at the end of <body> measures the h1 and
+     sets the exact size (Fraunces' optical-size axis makes ink non-linear, so no
+     fixed ratio holds). width:0 + min-width:100% keeps the tagline out of the
+     column's intrinsic sizing, so the column hugs the h1 and justify has slack. */
   .tagline{display:block;width:0;min-width:100%;margin:0;font-family:"Schibsted Grotesk",system-ui,sans-serif;font-weight:400;font-size:clamp(9.7px,1.1vw,15.5px);letter-spacing:.2em;text-transform:uppercase;color:rgba(242,242,240,.38);text-align:justify;text-align-last:justify;-moz-text-align-last:justify}
 
   html{scroll-behavior:smooth}
@@ -93,6 +93,12 @@
                   </sc-if>
                 </div>
               </div>
+              <sc-if value="{{ v.showBelow }}" hint-placeholder-val="{{ false }}">
+                <div style="padding:9px 1px 0;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-family:'Schibsted Grotesk',system-ui,sans-serif;font-size:12.5px;font-weight:500;letter-spacing:-.01em;line-height:1.25;color:#f2f2f0">{{ v.artist }}</span>
+                  <span style="font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;line-height:1.3;color:rgba(242,242,240,.46)">{{ v.title }}</span>
+                </div>
+              </sc-if>
             </button>
           </li>
         </sc-for>
@@ -467,7 +473,7 @@ class Component extends DCLogic {
       featured: slideWindow(FEATURED, 3, this.state.featuredIdx).map(f => this.creditSlot(f, 68)),
       asLogos: (this.props.creditsStyle ?? "Logos") === "Logos",
       asText: (this.props.creditsStyle ?? "Logos") !== "Logos",
-      gridColumns: "repeat(3,1fr)",
+      gridColumns: this.state.touch ? "repeat(2,1fr)" : "repeat(3,1fr)",
       metaColumns: "repeat(auto-fit,minmax(min(100%,260px),1fr))",
       mapColumns: this.state.touch ? "minmax(0,1fr)" : "minmax(0,1.55fr) minmax(0,1fr)",
       controlsOpacity: hovering || touch ? 1 : 0,
@@ -498,7 +504,6 @@ class Component extends DCLogic {
       videos: VIDEOS.map((vi, i) => {
         const on = this.state.hover === i;
         const isTouch = this.state.touch;
-        const rest = isTouch && !on;
         const brightOff = (vi.brightOff || 1) * 1.16;
         const contrastOff = vi.contrastOff || 1.06;
         const brightOn = vi.brightOn || 1;
@@ -515,18 +520,19 @@ class Component extends DCLogic {
           subColor: "rgba(242,242,240,.82)",
           thumb: vi.cover || ("https://img.youtube.com/vi/" + vi.yt + "/" + (vi.thumbQuality || "maxresdefault") + ".jpg" + (vi.bust ? "?v=" + vi.bust : "")),
           aria: "Play " + vi.artist + " — " + vi.title,
-          filter: on ? "grayscale(0) contrast(" + (vi.contrastOn || 1) + ") brightness(" + brightOn + ")" : "grayscale(1) contrast(" + contrastOff + ") brightness(" + brightOff + ")",
-          imgOpacity: on ? 1 : 0.84,
-          imgScale: (on ? "scale(1.075)" : "scale(1)") + (vi.flip ? " scaleX(-1)" : ""),
-          capOpacity: on || rest ? 1 : 0,
-          capShift: on || rest ? "translateY(0)" : "translateY(6px)",
-          scrimOpacityFinal: on ? 1 : (rest ? 0.62 : 0),
-          capNameSize: rest ? "12px" : "clamp(18px,1.6vw,23px)",
-          capTitleSize: rest ? "9.5px" : "clamp(13px,1.15vw,15px)",
-          capNameColor: rest ? "rgba(242,242,240,.9)" : "#f2f2f0",
-          capSubColor: rest ? "rgba(242,242,240,.62)" : "rgba(242,242,240,.82)",
-          capGap: rest ? "1px" : "3px",
-          showCredit: !!vi.credit && !rest,
+          filter: (on || isTouch) ? "grayscale(0) contrast(" + (vi.contrastOn || 1) + ") brightness(" + brightOn + ")" : "grayscale(1) contrast(" + contrastOff + ") brightness(" + brightOff + ")",
+          imgOpacity: (on || isTouch) ? 1 : 0.84,
+          imgScale: ((on && !isTouch) ? "scale(1.075)" : "scale(1)") + (vi.flip ? " scaleX(-1)" : ""),
+          capOpacity: (on && !isTouch) ? 1 : 0,
+          capShift: (on && !isTouch) ? "translateY(0)" : "translateY(6px)",
+          scrimOpacityFinal: (on && !isTouch) ? 1 : 0,
+          capNameSize: "clamp(18px,1.6vw,23px)",
+          capTitleSize: "clamp(13px,1.15vw,15px)",
+          capNameColor: "#f2f2f0",
+          capSubColor: "rgba(242,242,240,.82)",
+          capGap: "3px",
+          showCredit: !!vi.credit && !isTouch,
+          showBelow: isTouch,
           enter: () => this.setState({ hover: i }),
           leave: () => this.setState({ hover: null }),
           open: () => this.setState({ active: i, playingVideo: false })
