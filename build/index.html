@@ -3,6 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cole dab — music video director</title>
+<meta name="description" content="Music video director. Jennifer Lopez, Kid Cudi, Skrillex, Rae Sremmurd. Filmed in 37 countries across 5 continents.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="cole dab">
+<meta property="og:title" content="cole dab — music video director">
+<meta property="og:description" content="Music video director. Jennifer Lopez, Kid Cudi, Skrillex, Rae Sremmurd. Filmed in 37 countries across 5 continents.">
+<meta property="og:url" content="https://coledab.com/">
+<meta property="og:image" content="https://coledab.com/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="cole dab — music video director">
+<meta name="twitter:description" content="Music video director. Jennifer Lopez, Kid Cudi, Skrillex, Rae Sremmurd. Filmed in 37 countries across 5 continents.">
+<meta name="twitter:image" content="https://coledab.com/assets/og-card.png">
+<meta name="theme-color" content="#0a0a0b">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -19,7 +36,7 @@
      sets the exact size (Fraunces' optical-size axis makes ink non-linear, so no
      fixed ratio holds). width:0 + min-width:100% keeps the tagline out of the
      column's intrinsic sizing, so the column hugs the h1 and justify has slack. */
-  .tagline{display:block;width:0;min-width:100%;margin:0;font-family:"Schibsted Grotesk",system-ui,sans-serif;font-weight:400;font-size:clamp(9.7px,1.1vw,15.5px);letter-spacing:.2em;text-transform:uppercase;color:rgba(242,242,240,.38);text-align:justify;text-align-last:justify;-moz-text-align-last:justify}
+  .tagline{display:block;width:0;min-width:100%;margin:0;font-family:"Schibsted Grotesk",system-ui,sans-serif;font-weight:400;font-size:clamp(9.7px,1.1vw,15.5px);letter-spacing:.2em;text-transform:uppercase;color:#f2f2f0;text-align:justify;text-align-last:justify;-moz-text-align-last:justify}
 
   html{scroll-behavior:smooth}
   body{margin:0;background:#0a0a0b;color:#f2f2f0;font-family:"Schibsted Grotesk",system-ui,"Helvetica Neue",Arial,sans-serif;font-weight:500;-webkit-font-smoothing:antialiased;text-wrap:pretty}
@@ -44,10 +61,10 @@
   <a href="contact.html" style="font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:#f2f2f0;padding:10px 18px;border:1px solid rgba(242,242,240,.14);border-radius:999px;background:rgba(10,10,11,.5);backdrop-filter:blur(8px);transition:border-color .4s cubic-bezier(.22,.61,.36,1),background .4s cubic-bezier(.22,.61,.36,1)" style-hover="border-color:#f2f2f0;background:rgba(10,10,11,.85);color:#f2f2f0">Contact</a>
   </nav>
 
-  <header style="padding:clamp(72px,11vh,128px) clamp(24px,4vw,48px) 0;display:flex;flex-direction:column;gap:clamp(20px,3vw,36px)">
+  <header style="padding:clamp(34px,5vh,64px) clamp(24px,4vw,48px) 0;display:flex;flex-direction:column;gap:clamp(20px,3vw,36px)">
     <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;max-width:1400px;width:100%;margin:0 auto">
       <div style="display:flex;flex-direction:column;gap:clamp(8px,1vw,14px)">
-        <h1 style="margin:0;font-family:Fraunces,Georgia,serif;font-weight:500;font-size:clamp(44px,5.4vw,76px);letter-spacing:-.035em;line-height:.96">cole dab</h1>
+        <h1 style="margin:0;font-family:Fraunces,Georgia,serif;font-weight:500;font-size:clamp(44px,5.4vw,76px);letter-spacing:-.035em;line-height:.96"><span style="display:inline-block;background:#f2f2f0;color:#0a0a0b;padding:.1em .07em .06em">cole dab</span></h1>
         <p class="tagline">MUSIC VIDEO DIRECTOR</p>
       </div>
       
@@ -77,8 +94,8 @@
 
     
     <section id="work" style="max-width:1400px;margin:0 auto;padding:clamp(28px,4vh,48px) clamp(24px,4vw,48px) 0">
-      <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">FEATURED DIRECTING WORK</h2>
-      <ul style="margin:0;padding:clamp(24px,3vw,40px) 0 0;list-style:none;display:grid;gap:clamp(20px,2.4vw,34px);grid-template-columns:{{ gridColumns }}">
+      <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:#0a0a0b;padding-bottom:10px;border-bottom:1px solid rgba(242,242,240,.14)"><span data-hl="1" style="display:inline-block;background:#f2f2f0;padding:.14em .22em .1em;margin-bottom:.16em">FEATURED DIRECTING WORK</span></h2>
+      <ul style="margin:0;padding:10px 0 0;list-style:none;display:grid;gap:clamp(20px,2.4vw,34px);grid-template-columns:{{ gridColumns }}">
         <sc-for list="{{ videos }}" as="v" hint-placeholder-count="12">
           <li>
             <button type="button" onClick="{{ v.open }}" onMouseEnter="{{ v.enter }}" onMouseLeave="{{ v.leave }}" onFocus="{{ v.enter }}" onBlur="{{ v.leave }}" aria-label="{{ v.aria }}" style="width:100%;display:block;padding:0;background:transparent;border:0;cursor:pointer;color:inherit;font:inherit;text-align:left">
@@ -103,29 +120,33 @@
           </li>
         </sc-for>
       </ul>
-    </section><section style="max-width:1400px;margin:0 auto;padding:clamp(64px,10vh,124px) clamp(24px,4vw,48px) 0">
-      <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">Artists filmed</h2>
-      <div style="padding:clamp(34px,4.5vw,64px) 0 clamp(10px,1.5vw,22px);display:flex;flex-direction:column;align-items:center;gap:clamp(26px,3.4vw,48px);max-width:1180px;margin:0 auto;text-align:center">
+    </section><section style="max-width:1400px;margin:0 auto;padding:clamp(32px,5vh,62px) clamp(24px,4vw,48px) 0">
+      <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:#0a0a0b;padding-bottom:10px;border-bottom:1px solid rgba(242,242,240,.14)"><span data-hl="1" style="display:inline-block;background:#f2f2f0;padding:.14em .22em .1em;margin-bottom:.16em">Artists filmed</span></h2>
+      <div data-artists="1" style="padding:14px clamp(10px,2vw,28px) clamp(10px,1.5vw,22px);display:flex;flex-direction:column;align-items:center;gap:clamp(26px,3.4vw,48px);max-width:1180px;width:100%;margin:0 auto;text-align:center">
         <sc-for list="{{ tierGroups }}" as="g" hint-placeholder-count="4">
-          <ul style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;row-gap:{{ g.rowGap }};column-gap:{{ g.colGap }};font-family:{{ g.fontFamily }};font-weight:{{ g.fontWeight }};font-size:{{ g.fontSize }};letter-spacing:{{ g.letterSpacing }};line-height:{{ g.lineHeight }};text-transform:uppercase;color:{{ g.textColor }}">
-            <sc-for list="{{ g.items }}" as="a" hint-placeholder-count="10">
-              <li style="display:flex;align-items:center;column-gap:{{ g.colGap }}">
-                <span style="transition:color .3s cubic-bezier(.22,.61,.36,1);cursor:default" style-hover="color:#ff5a36">{{ a.name }}</span>
-                <sc-if value="{{ a.sep }}" hint-placeholder-val="{{ true }}">
-                  <span aria-hidden="true" style="flex:none;width:5px;height:5px;background:#ff5a36;transform:rotate(45deg);opacity:.62"></span>
-                </sc-if>
-              </li>
+          <div data-tier="{{ g.tier }}" style="width:100%;display:flex;flex-direction:column;align-items:center;row-gap:{{ g.rowGap }};font-family:{{ g.fontFamily }};font-weight:{{ g.fontWeight }};font-size:{{ g.fontSize }};letter-spacing:{{ g.letterSpacing }};line-height:{{ g.lineHeight }};text-transform:uppercase;color:{{ g.textColor }}">
+            <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3">
+              <ul style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:nowrap;align-items:center;justify-content:center;column-gap:{{ r.gap }};max-width:100%">
+                <sc-for list="{{ r.items }}" as="a" hint-placeholder-count="4">
+                  <li style="display:flex;align-items:center;column-gap:{{ r.gap }};white-space:nowrap">
+                    <span style="transition:color .3s cubic-bezier(.22,.61,.36,1);cursor:default" style-hover="color:#ff5a36">{{ a.name }}</span>
+                    <sc-if value="{{ a.sep }}" hint-placeholder-val="{{ true }}">
+                      <span aria-hidden="true" style="flex:none;width:{{ g.sepSize }};height:{{ g.sepSize }};background:#ff5a36;transform:rotate(45deg);opacity:.62"></span>
+                    </sc-if>
+                  </li>
+                </sc-for>
+              </ul>
             </sc-for>
-          </ul>
+          </div>
         </sc-for>
       </div>
     </section>
 
     <section style="max-width:1400px;margin:0 auto;padding:clamp(48px,7vh,84px) clamp(24px,4vw,48px) 0;display:grid;gap:clamp(32px,4vw,64px);grid-template-columns:{{ metaColumns }}">
       <div>
-        <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">Record Labels</h2>
+        <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:#0a0a0b;padding-bottom:10px;border-bottom:1px solid rgba(242,242,240,.14)"><span data-hl="1" style="display:inline-block;background:#f2f2f0;padding:.14em .22em .1em;margin-bottom:.16em">Record Labels</span></h2>
         <sc-if value="{{ asLogos }}" hint-placeholder-val="{{ true }}">
-          <ul style="margin:0;padding:clamp(24px,2.8vw,38px) 0 0;list-style:none;display:flex;align-items:center;justify-content:center;gap:clamp(40px,4.5vw,70px);overflow:hidden">
+          <ul style="margin:0;padding:14px 0 0;list-style:none;display:flex;align-items:center;justify-content:center;gap:clamp(40px,4.5vw,70px);overflow:hidden">
             <sc-for list="{{ labels }}" as="l" hint-placeholder-count="0">
               <li style="position:relative;display:flex;align-items:center;justify-content:center;width:{{ l.logoW }};height:{{ l.logoH }};opacity:{{ l.slotOpacity }};transform:scale({{ l.slotScale }});transition:opacity .5s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1)">
                 <div style="position: absolute; inset: 0; background-image: {{ l.bgLogo }}; background-size: contain; background-position: center; background-repeat: no-repeat; opacity: {{ l.logoOpacity }}; transition: opacity .3s"></div>
@@ -137,17 +158,17 @@
           </ul>
         </sc-if>
         <sc-if value="{{ asText }}" hint-placeholder-val="{{ false }}">
-          <ul style="margin:0;padding:clamp(18px,2vw,26px) 0 0;list-style:none;display:flex;flex-direction:column;gap:13px;font-size:clamp(16px,1.7vw,21px);font-weight:500;letter-spacing:-.005em;line-height:1.35;color:rgba(242,242,240,.76)">
+          <ul style="margin:0;padding:12px 0 0;list-style:none;display:flex;flex-direction:column;gap:13px;font-size:clamp(16px,1.7vw,21px);font-weight:500;letter-spacing:-.005em;line-height:1.35;color:rgba(242,242,240,.76)">
             <sc-for list="{{ labels }}" as="l" hint-placeholder-count="10">
               <li>{{ l.name }}</li>
             </sc-for>
           </ul>
         </sc-if>
       </div>
-      <div>
-        <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(242,242,240,.46);padding-bottom:20px;border-bottom:1px solid rgba(242,242,240,.14)">As seen on</h2>
+      <div style="border-left:{{ colRule }};padding-left:{{ colPad }}">
+        <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:#0a0a0b;padding-bottom:10px;border-bottom:1px solid rgba(242,242,240,.14)"><span data-hl="1" style="display:inline-block;background:#f2f2f0;padding:.14em .22em .1em;margin-bottom:.16em">As seen on</span></h2>
         <sc-if value="{{ asLogos }}" hint-placeholder-val="{{ true }}">
-          <ul style="margin:0;padding:clamp(24px,2.8vw,38px) 0 0;list-style:none;display:flex;align-items:center;justify-content:center;gap:clamp(40px,4.5vw,70px);overflow:hidden">
+          <ul style="margin:0;padding:14px 0 0;list-style:none;display:flex;align-items:center;justify-content:center;gap:clamp(40px,4.5vw,70px);overflow:hidden">
             <sc-for list="{{ featured }}" as="f" hint-placeholder-count="0">
               <li style="position:relative;display:flex;align-items:center;justify-content:center;width:{{ f.logoW }};height:{{ f.logoH }};opacity:{{ f.slotOpacity }};transform:scale({{ f.slotScale }});transition:opacity .5s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1)">
                 <div style="position:absolute;inset:0;background-image:{{ f.bgLogo }};background-size:contain;background-position:center;background-repeat:no-repeat;opacity:{{ f.logoOpacity }};transition:opacity .3s"></div>
@@ -159,7 +180,7 @@
           </ul>
         </sc-if>
         <sc-if value="{{ asText }}" hint-placeholder-val="{{ false }}">
-          <ul style="margin:0;padding:clamp(18px,2vw,26px) 0 0;list-style:none;display:flex;flex-direction:column;gap:13px;font-size:clamp(16px,1.7vw,21px);font-weight:500;letter-spacing:-.005em;line-height:1.35;color:rgba(242,242,240,.76)">
+          <ul style="margin:0;padding:12px 0 0;list-style:none;display:flex;flex-direction:column;gap:13px;font-size:clamp(16px,1.7vw,21px);font-weight:500;letter-spacing:-.005em;line-height:1.35;color:rgba(242,242,240,.76)">
             <sc-for list="{{ featured }}" as="f" hint-placeholder-count="7">
               <li>{{ f.name }}</li>
             </sc-for>
@@ -170,8 +191,8 @@
 
     <section aria-label="Countries filmed in" style="max-width:1400px;margin:0 auto;padding:clamp(64px,9vh,110px) clamp(24px,4vw,48px) 0;display:grid;gap:clamp(32px,4vw,64px);grid-template-columns:minmax(0,1fr);align-items:stretch">
             <div style="display:flex;flex-direction:column">
-        <h2 style="margin: 0; font-size: clamp(22px,1.95vw,27px); font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: rgba(242,242,240,.46); padding-bottom: 20px; border-bottom: 1px solid rgba(242,242,240,.14); line-height: 1.2">Filmed in {{ countryTotal }} Countries Across 5 Continents</h2>
-        <div style="padding:clamp(16px,2vw,26px) 0 0;display:grid;gap:clamp(24px,3vw,52px);grid-template-columns:{{ mapColumns }};align-items:center">
+        <h2 style="margin: 0; font-size: clamp(22px,1.95vw,27px); font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color:#0a0a0b;padding-bottom:10px; border-bottom: 1px solid rgba(242,242,240,.14); line-height: 1.2"><span data-hl="1" style="display:inline-block;color:#f2f2f0;margin-bottom:.16em">Filmed in <span style="color:#ff5a36">{{ countryTotal }} Countries</span> Across <span style="color:#ff5a36">5 Continents</span></span></h2>
+        <div style="padding:12px 0 0;display:grid;gap:clamp(24px,3vw,52px);grid-template-columns:{{ mapColumns }};align-items:center">
           <iframe ref="{{ mapRef }}" src="filmed-in-map.html" title="Map of countries filmed in" loading="lazy" style="width:100%;aspect-ratio:900/450;border:0;display:block;background:#0a0a0b"></iframe>
         <div style="display:flex;flex-direction:column;gap:clamp(10px,1.4vw,18px)">
           <sc-for list="{{ countries }}" as="c" hint-placeholder-count="4">
@@ -188,7 +209,7 @@
       </div>
     </section>
 
-    <section id="contact" style="max-width:1400px;margin:0 auto;padding:clamp(72px,11vh,130px) clamp(24px,4vw,48px) clamp(32px,4vh,52px)">
+    <section id="contact" style="max-width:1400px;margin:0 auto;padding:clamp(34px,5vh,58px) clamp(24px,4vw,48px) 14px">
       <div style="display:flex;flex-direction:column;align-items:flex-start;gap:10px;font-size:clamp(14px,1.5vw,18px);letter-spacing:.12em;text-transform:uppercase;color:rgba(242,242,240,.52)">
         <strong style="font-weight:500;color:#f2f2f0">Management</strong>
         <span>Kyle Jensen / Nominal</span>
@@ -237,25 +258,25 @@
 const MOBILE_TITLES = ["Save Me Tonight", "don't u see i'm on the phone?!", "Entertainment Lies", "Assume", "Okay, I'm Reloaded", "Shook!", "Dream Shade", "Destroy", "King of This Town", "Magical Thinking"];
 const VIDEOS = [
   { yt: "Gv1kmoTihz8", artist: "Chip Tha Ripper", title: "don't u see i'm on the phone?!", cover: "assets/covers/chip-dont-u-see-me-on-the-phone.jpg", contrastOff: 0.98, contrastOn: 0.98, brightOff: 0.88 },
-  { yt: "y8HLQn3YAiw", artist: "Jennifer Lopez & David Guetta", title: "Save Me Tonight", credit: "Warner Records", cover: "assets/covers/jlo-save-me-tonight.jpg", align: "center", vpos: "top", contrastOff: 1.78, contrastOn: 1.32, brightOff: 0.74 },
-  { yt: "oRwLPDbkKd0", artist: "Hail The Sun", title: "Entertainment Lies", credit: "Equal Vision Records", cover: "assets/covers/hail-the-sun-ent-lies.jpg", brightOff: 1.36, brightOn: 1.03, contrastOff: 0.96, contrastOn: 0.97 },
+  { yt: "y8HLQn3YAiw", artist: "Jennifer Lopez & David Guetta", title: "Save Me Tonight", credit: "Warner Records", cover: "assets/covers/jlo-save-me-tonight.jpg", align: "center", vpos: "top", contrastOff: 1.2, contrastOn: 1.04, brightOff: 0.9, brightOn: 0.95 },
+  { yt: "oRwLPDbkKd0", artist: "Hail The Sun", title: "Entertainment Lies", credit: "Equal Vision Records", cover: "assets/covers/hail-the-sun-ent-lies.jpg", brightOff: 1.46, brightOn: 1.13, contrastOff: 1.1, contrastOn: 1.08 },
   { yt: "GVYGBuoZ5ds", artist: "Sylar", title: "Assume", credit: "Hopeless Records", align: "right", cover: "assets/covers/assume.jpg" },
-  { yt: "QjBCIB0GDmA", artist: "Sylar", title: "Shook!", credit: "Hopeless Records", align: "center", cover: "assets/covers/shook.jpg" },
+  { yt: "QjBCIB0GDmA", artist: "Sylar", title: "Shook!", credit: "Hopeless Records", align: "center", cover: "assets/covers/shook.jpg", contrastOff: 0.9, contrastOn: 0.92, brightOff: 1.07, brightOn: 1.05 },
   { yt: "UfyiViEl2hA", artist: "Young Milli", title: "Okay, I'm Reloaded" },
   { yt: "n8o8qANcUSc", artist: "King Chip x Fredo Santana", title: "Destroy", credit: "World Star Hip Hop Debut", cover: "assets/covers/destroy.jpg", contrastOff: 0.99, contrastOn: 0.99, brightOff: 1.04 },
   { yt: "XvPSAhjXk54", artist: "Icarus the Owl", title: "Dream Shade", credit: "Blue Swan Records", cover: "assets/covers/icarus.jpg", align: "right", contrastOff: 1.4, contrastOn: 1.15, brightOff: 0.95 },
-  { yt: "S13Vh1M201E", artist: "Helen Rose", title: "King of This Town", credit: "Clover Music Group", cover: "assets/covers/helen-rose.jpg", flip: true },
+  { yt: "S13Vh1M201E", artist: "Helen Rose", title: "King of This Town", credit: "Clover Music Group", cover: "assets/covers/helen-rose.jpg", flip: true, brightOff: 1.12, brightOn: 1.08 },
   { yt: "p_qf4AS8Qyw", artist: "We Came As Romans", title: "A War Inside", credit: "Equal Vision Records", cover: "assets/covers/wcar-war.png", vpos: "top", textColor: "#0a0a0b", scrim: false },
-  { yt: "5gKBMjnjj4U", artist: "The Sometimes Island", title: "Magical Thinking", cover: "assets/covers/magical-thinking.jpg", contrastOff: 1.24, contrastOn: 1.08, brightOff: 0.92 },
+  { yt: "5gKBMjnjj4U", artist: "The Sometimes Island", title: "Magical Thinking", cover: "assets/covers/magical-thinking.jpg", contrastOff: 0.92, contrastOn: 0.9, brightOff: 0.9, brightOn: 0.93 },
   { yt: "GQZryuPliQ0", artist: "Hail The Sun", title: "Relax / Divide", credit: "Blue Swan Records", cover: "assets/covers/relax-divide.png", align: "right" },
-  { yt: "OyScIOIjfMI", artist: "Crucible x The Plot In You", title: "Slave to the Dime", cover: "assets/covers/crucible.jpg", brightOff: 1.12, brightOn: 1.08, contrastOff: 1.16, contrastOn: 1.06, align: "center", vpos: "bottom" },
+  { yt: "OyScIOIjfMI", artist: "Crucible x The Plot In You", title: "Slave to the Dime", cover: "assets/covers/crucible.jpg", brightOff: 1.58, brightOn: 1.5, contrastOff: 1.08, contrastOn: 1.14, align: "center", vpos: "bottom" },
   { yt: "A1217ckwc_E", artist: "Drew Fish Band", title: "Small Price to Pay", credit: "CMT Exclusive Premiere", cover: "assets/covers/drew-fish-small-price.png", align: "right", contrastOff: 1.46, contrastOn: 1.18, brightOff: 0.84 },
-  { yt: "G5hDwJ3_Uc8", artist: "Of Mice & Men", title: "Second & Sebring", credit: "Rise Records", cover: "assets/covers/of-mice-and-men.png" }
+  { yt: "G5hDwJ3_Uc8", artist: "Of Mice & Men", title: "Second & Sebring", credit: "Rise Records", cover: "assets/covers/of-mice-and-men.png", brightOff: 0.9, brightOn: 0.93, contrastOff: 0.94, contrastOn: 0.94 }
 ];
-const TIER1 = ["Jennifer Lopez", "David Guetta", "Skrillex", "Kid Cudi", "2 Chainz", "Juicy J", "Rae Sremmurd", "Swae Lee", "Macklemore", "Pierce The Veil"];
-const TIER2 = ["All Time Low", "Asking Alexandria", "Beartooth", "Big Boi", "Bring Me The Horizon", "Chip Tha Ripper", "A Day To Remember", "The Devil Wears Prada", "Gym Class Heroes", "Hunter Hayes", "Joe Nichols", "King Chip", "Knocked Loose", "Motionless In White", "$NOT", "Of Mice & Men", "The Plot In You", "Riff Raff", "Sleeping With Sirens", "Sueco", "Underoath", "We Came As Romans"];
-const TIER3 = ["The Amity Affliction", "Asleep At The Wheel", "Attila", "Breathe Carolina", "Chelsea Grin", "Chiodos", "Currents", "Dance Gavin Dance", "Emmure", "Hail The Sun", "I See Stars", "Landon Tewers", "Lil Aaron", "Miss May I", "Mod Sun", "Northlane", "Saosin", "The Sometimes Island", "Sylar", "Volumes", "Whitechapel"];
-const TIER4 = ["2x4", "Abandon All Ships", "The Air I Breathe", "As Cities Burn", "Ben Baxter", "Boondock", "Crucible", "Drew Fish Band", "For All Those Sleeping", "For Today", "Icarus The Owl", "I Married The Prom Queen", "In Fear And Faith", "InkMonstarr", "I Set My Friends On Fire", "iwrestledabearonce", "Lil Milez", "Mickey Munday", "Myke Terry", "Reckless Kelly", "Sworn In", "Woe, Is Me", "Y2", "Young Milli"];
+const TIER1 = ["Jennifer Lopez", "David Guetta", "Skrillex", "2 Chainz", "Juicy J", "Swae Lee", "Macklemore", "Kid Cudi", "Rae Sremmurd", "Pierce The Veil"];
+const TIER2 = ["A Day To Remember","All Time Low","Asking Alexandria","Beartooth","Big Boi","Black Veil Brides","Bring Me The Horizon","Chip Tha Ripper","Gym Class Heroes","Hunter Hayes","Joe Nichols","King Chip","Knocked Loose","Motionless In White","Of Mice & Men","Riff Raff","Sleeping With Sirens","$NOT","Sueco","The Devil Wears Prada","The Plot In You","Underoath","We Came As Romans"];
+const TIER3 = ["Asleep At The Wheel","Attila","Breathe Carolina","Chelsea Grin","Chiodos","Currents","Dance Gavin Dance","Emmure","Hail The Sun","I See Stars","Landon Tewers","Lil Aaron","Miss May I","Mod Sun","Northlane","Saosin","Sylar","The Amity Affliction","The Sometimes Island","Volumes","Whitechapel"];
+const TIER4 = ["2x4","Abandon All Ships","As Cities Burn","Ben Baxter","Boondock","Crucible","Drew Fish Band","For All Those Sleeping","For Today","I Married The Prom Queen","I Set My Friends On Fire","Icarus The Owl","In Fear And Faith","InkMonstarr","iwrestledabearonce","Lil Milez","Mickey Munday","Myke Terry","Reckless Kelly","Sworn In","The Air I Breathe","Woe, Is Me","Y2","Young Milli"];
 const ARTISTS = TIER1.map(n => ({ name: n, tier: 1 }))
   .concat(TIER2.map(n => ({ name: n, tier: 2 })))
   .concat(TIER3.map(n => ({ name: n, tier: 3 })))
@@ -321,10 +342,51 @@ const FEATURED = [
 const ANTON = "Anton,'Schibsted Grotesk',system-ui,sans-serif";
 const GROTESK = "'Schibsted Grotesk',system-ui,sans-serif";
 const TIER_STYLE = {
-  1: { fontFamily: ANTON, fontWeight: 400, fontSize: "clamp(23px,5vw,78px)", letterSpacing: "0", lineHeight: ".94", textColor: "#f2f2f0", colGap: "clamp(14px,1.5vw,26px)", rowGap: "clamp(4px,.6vw,10px)" },
-  2: { fontFamily: ANTON, fontWeight: 400, fontSize: "clamp(16px,3.1vw,48px)", letterSpacing: "0", lineHeight: ".98", textColor: "rgba(242,242,240,.94)", colGap: "clamp(12px,1.3vw,22px)", rowGap: "clamp(3px,.5vw,8px)" },
-  3: { fontFamily: GROTESK, fontWeight: 600, fontSize: "clamp(12px,1.55vw,21px)", letterSpacing: ".05em", lineHeight: "1.3", textColor: "rgba(242,242,240,.74)", colGap: "clamp(10px,1.1vw,18px)", rowGap: "6px" },
-  4: { fontFamily: GROTESK, fontWeight: 500, fontSize: "clamp(10px,1vw,13px)", letterSpacing: ".14em", lineHeight: "1.4", textColor: "rgba(242,242,240,.5)", colGap: "clamp(8px,.85vw,14px)", rowGap: "5px" }
+  1: { fontFamily: ANTON, fontWeight: 400, sepSize: "13px", fontSize: "clamp(23px,5vw,78px)", letterSpacing: "0", lineHeight: ".94", textColor: "#f2f2f0", colGap: "clamp(14px,1.5vw,26px)", rowGap: "clamp(4px,.6vw,10px)" },
+  2: { fontFamily: ANTON, fontWeight: 400, sepSize: "8px", fontSize: "clamp(16px,3.1vw,48px)", letterSpacing: "0", lineHeight: ".98", textColor: "rgba(242,242,240,.94)", colGap: "clamp(12px,1.3vw,22px)", rowGap: "clamp(3px,.5vw,8px)" },
+  3: { fontFamily: GROTESK, fontWeight: 600, sepSize: "5px", fontSize: "clamp(11px,1.5vw,21px)", letterSpacing: ".05em", lineHeight: "1.3", textColor: "rgba(242,242,240,.74)", colGap: "clamp(10px,1.1vw,18px)", rowGap: "6px" },
+  4: { fontFamily: GROTESK, fontWeight: 500, sepSize: "4px", fontSize: "clamp(11px,1.3vw,17px)", letterSpacing: ".14em", lineHeight: "1.4", textColor: "rgba(242,242,240,.5)", colGap: "clamp(8px,.85vw,14px)", rowGap: "5px" }
+};
+const TIER_ROWS = { 1: 3, 2: 4, 3: 4, 4: 4 };
+const FLOOR = 0.72;
+const TIER_SEP = { 1: 13, 2: 8, 3: 5, 4: 4 };
+const TIER_GAP = { 1: 14, 2: 12, 3: 10, 4: 8 };
+const TIER_SHAPE = { 1: [3, 4, 3], 2: [6, 6, 6, 5], 3: [6, 6, 6, 3], 4: [8, 6, 5, 5] };
+const FALLBACK_ROWS = (t, n) => {
+  const per = Math.ceil(n / TIER_ROWS[t]);
+  const r = [];
+  for (let i = 0; i < n; i += per) r.push(Math.min(per, n - i));
+  return r;
+};
+const packRows = (widths, sepCost, avail) => {
+  const fits = counts => {
+    let i = 0;
+    return counts.every(n => {
+      let w = 0;
+      for (let k = 0; k < n; k++) w += widths[i + k] + (k < n - 1 ? sepCost : 0);
+      i += n;
+      return w <= avail;
+    });
+  };
+  const total = widths.length;
+  let R = 1;
+  // greedy to find a feasible row count
+  let g = [], cur = 0, w = 0;
+  widths.forEach(ww => {
+    const add = (cur === 0 ? 0 : sepCost) + ww;
+    if (cur > 0 && w + add > avail) { g.push(cur); cur = 0; w = 0; }
+    cur += 1; w += (cur === 1 ? ww : add);
+  });
+  if (cur) g.push(cur);
+  R = Math.max(1, g.length);
+  for (let tries = 0; tries < 14; tries++) {
+    const base = Math.floor(total / R), extra = total % R;
+    const counts = [];
+    for (let k = 0; k < R; k++) counts.push(base + (k < extra ? 1 : 0));
+    if (counts.every(c => c > 0) && fits(counts)) return counts;
+    R++;
+  }
+  return g;
 };
 const PAUSE_D = "M7 5h3.2v14H7zM13.8 5H17v14h-3.2z";
 const PLAY_D = "M7 4.5l12 7.5-12 7.5z";
@@ -336,7 +398,7 @@ const slideWindow = (arr, size, idx) => {
 };
 
 class Component extends DCLogic {
-  state = { playing: true, volume: 0, hovering: false, active: null, hover: null, labelIdx: 0, featuredIdx: 0, touch: !!(typeof window !== "undefined" && window.matchMedia && window.matchMedia("(hover:none),(max-width:820px)").matches) };
+  state = { playing: true, volume: 0, hovering: false, active: null, hover: null, labelIdx: 0, featuredIdx: 0, artistRows: null, wide: !!(typeof window !== "undefined" && window.innerWidth >= 1200), touch: !!(typeof window !== "undefined" && window.matchMedia && window.matchMedia("(hover:none),(max-width:820px)").matches) };
   heroRef = React.createRef();
   mapRef = React.createRef();
   playerBox = React.createRef();
@@ -378,6 +440,86 @@ class Component extends DCLogic {
       if (msg.type === "map-hover") this.setState({ geoHover: msg.key || null });
     };
     window.addEventListener("message", this.onMapMsg);
+    this.measureRows = () => {
+      const wrap = document.querySelector("[data-artists]");
+      if (!wrap || !wrap.clientWidth) return;
+      const avail = wrap.clientWidth - 2 * (parseFloat(getComputedStyle(wrap).paddingLeft) || 0) - 8;
+      const next = {};
+      [1, 2, 3, 4].forEach(t => {
+        const tierEl = wrap.querySelector('[data-tier="' + t + '"]');
+        if (!tierEl) return;
+        const cs = getComputedStyle(tierEl);
+        // Fixed nominal gap for fitting — the solved per-row gaps below must not
+        // feed back into the fit calculation or the type spirals downward.
+        const gap = TIER_GAP[t] || 12;
+        const probe = document.createElement("span");
+        probe.style.cssText = "position:absolute;left:-9999px;top:0;visibility:hidden;white-space:nowrap";
+        probe.style.fontFamily = cs.fontFamily;
+        probe.style.fontSize = cs.fontSize;
+        probe.style.fontWeight = cs.fontWeight;
+        probe.style.letterSpacing = cs.letterSpacing;
+        probe.style.textTransform = cs.textTransform;
+        document.body.appendChild(probe);
+        const widths = ARTISTS.filter(a => a.tier === t).map(a => {
+          probe.textContent = a.name;
+          return probe.getBoundingClientRect().width + 1;
+        });
+        probe.remove();
+        const total = widths.length;
+        let counts = (TIER_SHAPE[t] || []).slice();
+        if (counts.reduce((a, b) => a + b, 0) !== total) {
+          const target = TIER_ROWS[t];
+          const base = Math.floor(total / target), extra = total % target;
+          counts = [];
+          for (let k = 0; k < target; k++) counts.push(base + (k < extra ? 1 : 0));
+        }
+        const sepCost = gap * 2 + (TIER_SEP[t] || 5);
+        const prev = ((this.state.artistRows || {})[t] || {}).scale || 1;
+        const widest = cc => {
+          let i = 0, maxW = 0;
+          cc.forEach(c => {
+            let w = 0;
+            for (let k = 0; k < c; k++) w += widths[i + k] + (k < c - 1 ? sepCost : 0);
+            i += c;
+            if (w > maxW) maxW = w;
+          });
+          return maxW;
+        };
+        const scaleFor = cc => Math.min(1.6, Math.round(prev * (avail / widest(cc)) * 1000) / 1000);
+        // Preferred shape first; if it would crush the type below the legibility
+        // floor, add rows (even split) until it fits at readable size.
+        const locked = (TIER_SHAPE[t] || []).reduce((a, b) => a + b, 0) === total;
+        let scale = scaleFor(counts);
+        for (let R = counts.length + 1; !locked && scale < FLOOR && R <= 8; R++) {
+          const base = Math.floor(total / R), extra = total % R;
+          const alt = [];
+          for (let k = 0; k < R; k++) alt.push(base + (k < extra ? 1 : 0));
+          const s = scaleFor(alt);
+          if (s > scale) { counts = alt; scale = s; }
+        }
+        scale = Math.max(0.45, scale);
+        // Tiers 2-4 taper: line 1 fills the block, each line below is a step
+        // narrower. Word widths are fixed, so the step is made by solving the
+        // row's gap (before/after each diamond) for the target width.
+        const gaps = null;
+        next[t] = { counts: counts, scale: scale, gaps: gaps };
+      });
+      const cur = this.state.artistRows || {};
+      const same = [1, 2, 3, 4].every(t => {
+        const a = next[t], b = cur[t];
+        return a && b && Math.abs(a.scale - b.scale) < 0.006 && String(a.counts) === String(b.counts);
+      });
+      if (!same) this.setState({ artistRows: next });
+    };
+    this.rowTimers = [setTimeout(this.measureRows, 60), setTimeout(this.measureRows, 700), setTimeout(this.measureRows, 2200)];
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(this.measureRows);
+    window.addEventListener("resize", this.measureRows);
+    this.onWide = () => {
+      const wide = window.innerWidth >= 1200;
+      if (wide !== this.state.wide) this.setState({ wide: wide });
+    };
+    this.onWide();
+    window.addEventListener("resize", this.onWide);
     const mq = window.matchMedia ? window.matchMedia("(hover:none),(max-width:820px)") : null;
     if (mq) {
       this.setState({ touch: mq.matches });
@@ -446,13 +588,20 @@ class Component extends DCLogic {
 
   credit(item, size) {
     const ratio = (this.state.logoOk || {})[item.id];
+    const r = ratio || 2.5;
     return {
       name: item.name,
       bgLogo: "url(" + (item.logo || BLANK_PX) + ")",
       logoOpacity: ratio ? 1 : 0,
       showText: !ratio,
-      logoH: size + "px",
-      logoW: Math.round(size * 2.5 * (item.wide || 1)) + "px"
+      // Slot matches the logo's true aspect, so the art fills it exactly (no
+      // dead space counted as logo) and every mark renders at one cap height.
+      // Compact/circular marks ease down so they don't out-weigh wordmarks.
+      logoH: Math.round(size * (r < 1.6 ? 0.94 : 1)) + "px",
+      // Every slot is the same width, so the left / center / right positions in
+      // the marquee stay put no matter which logo is in them; the art is
+      // centered inside and still renders at one common height.
+      logoW: Math.round(size * 3.4) + "px"
     };
   }
 
@@ -465,17 +614,31 @@ class Component extends DCLogic {
       playerBox: this.playerBox,
       year: new Date().getFullYear(),
       tierGroups: [1, 2, 3, 4].map(t => {
-        const names = ARTISTS.filter(a => a.tier === t);
-        return Object.assign({ tier: t }, TIER_STYLE[t], {
-          items: names.map((a, i) => ({ name: a.name, sep: i < names.length - 1 }))
+        const names = ARTISTS.filter(a => a.tier === t).map(a => a.name);
+        const st = Object.assign({}, TIER_STYLE[t]);
+        if (this.state.touch) st.colGap = t === 1 ? "7px" : t === 2 ? "6px" : "5px";
+        const measured = (this.state.artistRows || {})[t];
+        const counts = (measured && measured.counts) || FALLBACK_ROWS(t, names.length);
+        if (measured && measured.scale && Math.abs(measured.scale - 1) > 0.004) st.fontSize = "calc((" + TIER_STYLE[t].fontSize + ") * " + measured.scale + ")";
+        const rows = [];
+        let i = 0;
+        counts.forEach(n => {
+          const items = names.slice(i, i + n).map((nm, j) => ({ name: nm, sep: (i + j) < names.length - 1 && j < n - 1 }));
+          i += n;
+          const g = measured && measured.gaps ? measured.gaps[rows.length] : null;
+          if (items.length) rows.push({ items: items, gap: g ? g + "px" : st.colGap });
         });
+        if (i < names.length) rows.push({ items: names.slice(i).map((nm, j) => ({ name: nm, sep: false })), gap: st.colGap });
+        return Object.assign({ tier: t }, st, { rows: rows });
       }),
       labels: slideWindow(LABELS, 3, this.state.labelIdx).map(l => this.creditSlot(l, 72)),
       featured: slideWindow(FEATURED, 3, this.state.featuredIdx).map(f => this.creditSlot(f, 68)),
       asLogos: (this.props.creditsStyle ?? "Logos") === "Logos",
       asText: (this.props.creditsStyle ?? "Logos") !== "Logos",
       gridColumns: this.state.touch ? "repeat(2,1fr)" : "repeat(3,1fr)",
-      metaColumns: "repeat(auto-fit,minmax(min(100%,260px),1fr))",
+      metaColumns: this.state.touch ? "minmax(0,1fr)" : "repeat(auto-fit,minmax(min(100%,260px),1fr))",
+      colRule: this.state.touch ? "0" : "1px solid rgba(242,242,240,.14)",
+      colPad: this.state.touch ? "0" : "clamp(20px,3vw,44px)",
       mapColumns: this.state.touch ? "minmax(0,1fr)" : "minmax(0,1.55fr) minmax(0,1fr)",
       controlsOpacity: hovering || touch ? 1 : 0,
       isPlaying: !!playing,
@@ -526,6 +689,8 @@ class Component extends DCLogic {
           subColor: "rgba(242,242,240,.82)",
           thumb: vi.cover || ("https://img.youtube.com/vi/" + vi.yt + "/" + (vi.thumbQuality || "maxresdefault") + ".jpg" + (vi.bust ? "?v=" + vi.bust : "")),
           aria: "Play " + vi.artist + " — " + vi.title,
+          // B&W at rest, color on hover. Full-color-at-rest alternative:
+          // filter: "grayscale(0) contrast(" + (vi.contrastOn || 1) + ") brightness(" + brightOn + ")",
           filter: (on || isTouch) ? "grayscale(0) contrast(" + (vi.contrastOn || 1) + ") brightness(" + brightOn + ")" : "grayscale(1) contrast(" + contrastOff + ") brightness(" + brightOff + ")",
           imgOpacity: (on || isTouch) ? 1 : 0.84,
           imgScale: ((on && !isTouch) ? "scale(1.075)" : "scale(1)") + (vi.flip ? " scaleX(-1)" : ""),
@@ -600,7 +765,14 @@ class Component extends DCLogic {
     r.selectNodeContents(h);
     var w = r.getBoundingClientRect().width;
     if (!w) return false;
-    p.style.fontSize = Math.max(8, Math.min(22, w / k)) + "px";
+    var size = Math.max(8, Math.min(22, (w / k) * 0.985));
+    p.style.fontSize = size + "px";
+    var guard = 0;
+    var lines = function () { var rr = document.createRange(); rr.selectNodeContents(p); return rr.getClientRects().length; };
+    while (lines() > 1 && size > 8 && guard++ < 40) {
+      size -= 0.4;
+      p.style.fontSize = size + "px";
+    }
     return true;
   }
   var tries = 0;
