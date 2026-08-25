@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -285,8 +285,6 @@ const ARTISTS = TIER1.map(n => ({ name: n, tier: 1 }))
   .concat(TIER2.map(n => ({ name: n, tier: 2 })))
   .concat(TIER3.map(n => ({ name: n, tier: 3 })))
   .concat(TIER4.map(n => ({ name: n, tier: 4 })));
-const BF = "?c=1idGQpxiWNAd26rB-lO";
-const bfLogo = domain => "https://cdn.brandfetch.io/domain/" + domain + "/h/88/theme/light/fallback/404/type/logo" + BF;
 const local = id => "assets/logos/label/" + id + ".png";
 const LABELS = [
   { name: "Atlantic Records", id: "atlantic", logo: local("atlantic") },
@@ -326,7 +324,7 @@ const featLocal = id => "assets/logos/seen/" + id;
 const FEATURED = [
   { name: "MTV", id: "mtv", logo: featLocal("mtv.png") },
   { name: "CMT", id: "cmt", logo: featLocal("cmt.png"), wide: 0.9 },
-  { name: "NBC", id: "nbc", logo: bfLogo("nbc.com") },
+  { name: "NBC", id: "nbc", logo: featLocal("nbc.png") },
   { name: "FOX", id: "fox", logo: featLocal("fox2.png") },
   { name: "CBS", id: "cbs", logo: featLocal("cbs.png") },
   { name: "TODAY", id: "today", logo: featLocal("today.png") },
@@ -340,7 +338,7 @@ const FEATURED = [
   { name: "Alternative Press", id: "ap", logo: featLocal("ap.png"), wide: 2.05 },
   { name: "People", id: "people", logo: featLocal("people.png") },
   { name: "TMZ", id: "tmz", logo: featLocal("tmz.png"), wide: 1.15 },
-  { name: "SXSW Film Festival", id: "sxsw", logo: bfLogo("sxsw.com") },
+  { name: "SXSW Film Festival", id: "sxsw", logo: featLocal("sxsw.png") },
   { name: "Playboy", id: "playboy", logo: featLocal("playboy.png") }
 ];
 const ANTON = "Anton,'Schibsted Grotesk',system-ui,sans-serif";
@@ -520,7 +518,9 @@ class Component extends DCLogic {
         // Break points come from measured width, not from counts: at the size the
         // floor settled on, each line is filled up to its ramp target, so the lines
         // step down naturally instead of an even split forcing them all equal.
-        if (!narrow && !authored) {
+        // Tier 1 is authored, not solved: 3/4/3 always, at whatever size fits.
+        if (!narrow && t === 1) { counts = TIER_SHAPE[1].slice(); scale = Math.max(0.45, scaleFor(counts)); }
+        if (!narrow && !authored && t !== 1) {
           const f = scale / (prev || 1);
           const step = avail * 0.055;
           const cost = sepCost * f;
@@ -576,6 +576,17 @@ class Component extends DCLogic {
             if (targets[0] <= avail + 0.5) break;
             targets = build(avail * frac);
           }
+          // Hard overflow guard: the fit solver works from probe widths and an
+          // estimated separator cost, so a line can still measure wider than the
+          // block even at the minimum gap. Shrink the tier by the worst offender
+          // and re-measure — nothing is ever allowed to run past the edge.
+          const lim = avail - 2;
+          let shrink = 1;
+          rows.forEach(r => { if (r.natural > lim) shrink = Math.min(shrink, lim / r.natural); });
+          if (shrink < 0.999) {
+            scale = Math.max(0.45, Math.round(scale * shrink * 1000) / 1000);
+            this.needsRepass = true;
+          }
           const over = Math.max(0, targets[0] - avail);
           rows.forEach((r, idx) => {
             const target = Math.min(targets[idx] - over, avail - 2);
@@ -586,6 +597,10 @@ class Component extends DCLogic {
         }
         next[t] = { counts: counts, scale: scale, gaps: gaps, basePx: basePx };
       });
+      if (this.needsRepass) {
+        this.needsRepass = false;
+        requestAnimationFrame(() => requestAnimationFrame(this.measureRows));
+      }
       // Narrow layouts add rows per tier independently, which can leave a lower
       // tier set larger than the one above it. Re-impose the hierarchy.
       if (window.innerWidth < 820) {
