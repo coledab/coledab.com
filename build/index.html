@@ -75,7 +75,7 @@
     </div>
     <div style="width:100%;max-width:1400px;margin:0 auto">
       <div ref="{{ playerBox }}" style="position:relative;aspect-ratio:16/9;background:#111113;overflow:hidden">
-        <iframe ref="{{ heroRef }}" src="https://player.vimeo.com/video/1194676841?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;dnt=1" title="Cole Dabney | Director Reel | 2026" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+        <iframe ref="{{ heroRef }}" src="https://player.vimeo.com/video/1194676841?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;playsinline=1&amp;dnt=1" title="Cole Dabney | Director Reel | 2026" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
         <div style="position:absolute;bottom:0;right:0;z-index:2;display:flex;gap:2px;padding:clamp(10px,1.4vw,18px);opacity:{{ controlsOpacity }};transition:opacity .45s cubic-bezier(.22,.61,.36,1)">
           <button type="button" onClick="{{ togglePlay }}" aria-label="{{ playLabel }}" style="width:36px;height:36px;display:grid;place-items:center;background:rgba(10,10,11,.5);border:0;color:#f2f2f0;cursor:pointer;transition:background .3s ease" style-hover="background:rgba(10,10,11,.85)">
             <sc-if value="{{ isPlaying }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 5h3.2v14H7zM13.8 5H17v14h-3.2z" fill="currentColor"></path></svg></sc-if><sc-if value="{{ isPaused }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 4.5l12 7.5-12 7.5z" fill="currentColor"></path></svg></sc-if>
@@ -416,15 +416,23 @@ class Component extends DCLogic {
     if (window.Vimeo && this.heroRef.current) {
       this.api = new window.Vimeo.Player(this.heroRef.current);
       const kick = () => {
-        if (!this.api) return;
+        if (!this.api || this.kicking) return;
+        this.kicking = true;
         this.api.setMuted(true).catch(() => {});
-        this.api.play().catch(() => {});
+        this.api.play().catch(() => {}).then(() => { setTimeout(() => { this.kicking = false; }, 600); });
       };
       this.api.ready().then(kick).catch(() => {});
       this.kick = () => { kick(); document.removeEventListener("touchstart", this.kick); document.removeEventListener("click", this.kick); };
       document.addEventListener("touchstart", this.kick, { passive: true, once: true });
       document.addEventListener("click", this.kick, { once: true });
-      this.api.on("pause", () => { if (this.state.playing) kick(); });
+      // One recovery attempt only. Retrying on every pause event fights the
+      // player when autoplay is blocked: play → reject → pause → play, which is
+      // what makes the reel strobe.
+      this.api.on("pause", () => {
+        if (!this.state.playing || this.recovered) return;
+        this.recovered = true;
+        setTimeout(kick, 400);
+      });
     }
     const box = this.playerBox.current;
     if (box) {
@@ -766,6 +774,7 @@ class Component extends DCLogic {
       volumePct: Math.round(volume * 100),
       togglePlay: () => {
         const next = !playing;
+        this.recovered = false;
         if (this.api) next ? this.api.play() : this.api.pause();
         this.setState({ playing: next });
       },

@@ -29,7 +29,7 @@ per page is the whole point.
 3. **`wrangler.toml` at the root**, exactly:
 
    ```toml
-   name = "coledab-website"
+   name = "coledab"
    compatibility_date = "2026-08-20"
 
    [assets]
