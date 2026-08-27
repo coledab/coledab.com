@@ -32,6 +32,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Schibsted+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<script src="https://player.vimeo.com/api/player.js"></script>
 <script src="./image-slot.js"></script>
 <style>
   @media (max-width: 640px) {
@@ -93,6 +94,11 @@
     <div style="width:100%;max-width:1400px;margin:0 auto">
       <div ref="{{ playerBox }}" style="position:relative;aspect-ratio:16/9;background:#111113;overflow:hidden">
         <div ref="{{ heroMount }}" style="position:absolute;inset:0"></div>
+        <sc-if value="{{ needsTap }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ tapPlay }}" aria-label="Play reel" style="position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:rgba(10,10,11,.42);border:0;cursor:pointer;color:#f2f2f0">
+            <svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true"><path d="M7 4.5l12 7.5-12 7.5z" fill="currentColor"></path></svg>
+          </button>
+        </sc-if>
         <div style="position:absolute;bottom:0;right:0;z-index:2;display:flex;gap:2px;padding:clamp(10px,1.4vw,18px);opacity:{{ controlsOpacity }};transition:opacity .45s cubic-bezier(.22,.61,.36,1)">
           <button type="button" onClick="{{ togglePlay }}" aria-label="{{ playLabel }}" style="width:36px;height:36px;display:grid;place-items:center;background:rgba(10,10,11,.5);border:0;color:#f2f2f0;cursor:pointer;transition:background .3s ease" style-hover="background:rgba(10,10,11,.85)">
             <sc-if value="{{ isPlaying }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 5h3.2v14H7zM13.8 5H17v14h-3.2z" fill="currentColor"></path></svg></sc-if><sc-if value="{{ isPaused }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 4.5l12 7.5-12 7.5z" fill="currentColor"></path></svg></sc-if>
@@ -429,7 +435,7 @@ const slideWindow = (arr, size, idx) => {
 };
 
 class Component extends DCLogic {
-  state = { playing: true, volume: 0, hovering: false, active: null, hover: null, labelIdx: 0, featuredIdx: 0, artistRows: null, wide: !!(typeof window !== "undefined" && window.innerWidth >= 1200), touch: !!(typeof window !== "undefined" && window.matchMedia && window.matchMedia("(hover:none),(max-width:820px)").matches) };
+  state = { playing: true, needsTap: false, volume: 0, hovering: false, active: null, hover: null, labelIdx: 0, featuredIdx: 0, artistRows: null, wide: !!(typeof window !== "undefined" && window.innerWidth >= 1200), touch: !!(typeof window !== "undefined" && window.matchMedia && window.matchMedia("(hover:none),(max-width:820px)").matches) };
   heroRef = React.createRef();
   heroMount = React.createRef();
   mapRef = React.createRef();
@@ -437,42 +443,53 @@ class Component extends DCLogic {
   lastVolume = 0.7;
 
   componentDidMount() {
-    // The reel <video> is mounted imperatively, ONCE, outside React's tree.
+    // The reel iframe is mounted imperatively, ONCE, outside React's tree.
     // Leaving it in the template let unrelated re-renders (row measuring, logo
-    // probes) rebuild the node, which reloads the file and reads as a flicker
+    // probes) rebuild the node, which reloads the embed and reads as a flicker
     // loop that never starts. Never move this back into the template.
     const mount = this.heroMount.current;
     if (mount && !mount.firstChild) {
-      const v = document.createElement("video");
-      v.src = "assets/coledabdotcomreel.mp4";
-      v.muted = true;
-      v.defaultMuted = true;
-      v.autoplay = true;
-      v.loop = true;
-      v.playsInline = true;
-      v.setAttribute("muted", "");
-      v.setAttribute("playsinline", "");
-      v.setAttribute("webkit-playsinline", "");
-      v.preload = "auto";
-      v.tabIndex = -1;
-      v.setAttribute("aria-label", "Cole Dabney | Director Reel | 2026");
-      v.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;display:block";
-      mount.appendChild(v);
-      this.heroRef.current = v;
-      // Adapter so the existing controls keep their Vimeo-shaped call sites.
-      this.api = {
-        play: () => v.play().catch(() => {}),
-        pause: () => v.pause(),
-        setMuted: m => { v.muted = !!m; },
-        setVolume: n => { v.volume = Math.max(0, Math.min(1, n)); v.muted = n === 0; }
+      const f = document.createElement("iframe");
+      // NOT background=1. That mode gives no API handle when autoplay is
+      // declined, so the embed parks on the poster frame forever. A normal
+      // chromeless embed can be nudged.
+      f.src = "https://player.vimeo.com/video/1194676841?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&autopause=0&dnt=1";
+      f.title = "Cole Dabney | Director Reel | 2026";
+      f.allow = "autoplay; fullscreen; picture-in-picture";
+      f.setAttribute("allowfullscreen", "");
+      f.tabIndex = -1;
+      f.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0";
+      mount.appendChild(f);
+      this.heroRef.current = f;
+    }
+    const bindPlayer = () => {
+      if (this.api || !window.Vimeo || !this.heroRef.current) return !!this.api;
+      this.api = new window.Vimeo.Player(this.heroRef.current);
+      this.api.on("play", () => { if (!this.state.playing) this.setState({ playing: true }); });
+      this.api.on("pause", () => { if (this.state.playing) this.setState({ playing: false }); });
+      this.api.on("playing", () => {
+        this.confirmedPlaying = true;
+        clearTimeout(this.nudgeTimer);
+        if (this.state.needsTap) this.setState({ needsTap: false });
+      });
+      // BOUNDED nudges — three attempts, each cancelled the moment the player
+      // reports it is really playing. Unbounded retries are what strobed the
+      // reel; never replace this with an interval.
+      const delays = [500, 1500, 3000];
+      let i = 0;
+      const nudge = () => {
+        if (this.confirmedPlaying || !this.api) return;
+        this.api.setMuted(true).catch(() => {});
+        this.api.play().catch(() => {});
+        if (i < delays.length) this.nudgeTimer = setTimeout(nudge, delays[i++]);
+        else this.setState({ needsTap: true });
       };
-      v.addEventListener("play", () => { if (!this.state.playing) this.setState({ playing: true }); });
-      v.addEventListener("pause", () => { if (this.state.playing) this.setState({ playing: false }); });
-      // ONE nudge on first frame: Safari occasionally parks a muted autoplay
-      // video on the poster. Repeated retries are what used to strobe the reel
-      // — never add a timer here.
-      v.addEventListener("loadeddata", () => { v.play().catch(() => {}); }, { once: true });
-      v.play().catch(() => {});
+      this.api.on("loaded", () => { this.nudgeTimer = setTimeout(nudge, delays[i++]); });
+      return true;
+    };
+    if (!bindPlayer()) {
+      this.bindTimer = setInterval(() => { if (bindPlayer()) clearInterval(this.bindTimer); }, 300);
+      setTimeout(() => clearInterval(this.bindTimer), 15000);
     }
     const box = this.playerBox.current;
     if (box) {
@@ -775,6 +792,13 @@ class Component extends DCLogic {
     const v = active != null ? VIDEOS[active] : null;
     return {
       heroRef: this.heroRef,
+      needsTap: !!this.state.needsTap,
+      tapPlay: () => {
+        this.confirmedPlaying = true;
+        clearTimeout(this.nudgeTimer);
+        if (this.api) { this.api.setMuted(true); this.api.play(); }
+        this.setState({ needsTap: false, playing: true });
+      },
       heroMount: this.heroMount,
       playerBox: this.playerBox,
       year: new Date().getFullYear(),
