@@ -32,7 +32,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Schibsted+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
-<script src="https://player.vimeo.com/api/player.js" async></script>
 <script src="./image-slot.js"></script>
 <style>
   @media (max-width: 640px) {
@@ -438,36 +437,42 @@ class Component extends DCLogic {
   lastVolume = 0.7;
 
   componentDidMount() {
-    // The reel iframe is mounted imperatively, ONCE, outside React's tree.
+    // The reel <video> is mounted imperatively, ONCE, outside React's tree.
     // Leaving it in the template let unrelated re-renders (row measuring, logo
-    // probes) rebuild the node, which reloads the embed and reads as a flicker
+    // probes) rebuild the node, which reloads the file and reads as a flicker
     // loop that never starts. Never move this back into the template.
     const mount = this.heroMount.current;
     if (mount && !mount.firstChild) {
-      const f = document.createElement("iframe");
-      f.src = "https://player.vimeo.com/video/1194676841?background=1&autoplay=1&muted=1&loop=1&playsinline=1&dnt=1";
-      f.title = "Cole Dabney | Director Reel | 2026";
-      f.allow = "autoplay; fullscreen; picture-in-picture";
-      f.setAttribute("allowfullscreen", "");
-      f.tabIndex = -1;
-      f.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0";
-      mount.appendChild(f);
-      this.heroRef.current = f;
-    }
-    const bindPlayer = () => {
-      if (this.api || !window.Vimeo || !this.heroRef.current) return !!this.api;
-      this.api = new window.Vimeo.Player(this.heroRef.current);
-      // The iframe URL handles the single autoplay. Nothing here may call play()
-      // on its own: scripted retries fight the player and strobe the reel.
-      // The API is for the play/pause, volume and end-of-reel state only.
-      this.api.on("play", () => { if (!this.state.playing) this.setState({ playing: true }); });
-      this.api.on("pause", () => { if (this.state.playing) this.setState({ playing: false }); });
-
-      return true;
-    };
-    if (!bindPlayer()) {
-      this.bindTimer = setInterval(() => { if (bindPlayer()) clearInterval(this.bindTimer); }, 300);
-      setTimeout(() => clearInterval(this.bindTimer), 15000);
+      const v = document.createElement("video");
+      v.src = "assets/coledabdotcomreel.mp4";
+      v.muted = true;
+      v.defaultMuted = true;
+      v.autoplay = true;
+      v.loop = true;
+      v.playsInline = true;
+      v.setAttribute("muted", "");
+      v.setAttribute("playsinline", "");
+      v.setAttribute("webkit-playsinline", "");
+      v.preload = "auto";
+      v.tabIndex = -1;
+      v.setAttribute("aria-label", "Cole Dabney | Director Reel | 2026");
+      v.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;display:block";
+      mount.appendChild(v);
+      this.heroRef.current = v;
+      // Adapter so the existing controls keep their Vimeo-shaped call sites.
+      this.api = {
+        play: () => v.play().catch(() => {}),
+        pause: () => v.pause(),
+        setMuted: m => { v.muted = !!m; },
+        setVolume: n => { v.volume = Math.max(0, Math.min(1, n)); v.muted = n === 0; }
+      };
+      v.addEventListener("play", () => { if (!this.state.playing) this.setState({ playing: true }); });
+      v.addEventListener("pause", () => { if (this.state.playing) this.setState({ playing: false }); });
+      // ONE nudge on first frame: Safari occasionally parks a muted autoplay
+      // video on the poster. Repeated retries are what used to strobe the reel
+      // — never add a timer here.
+      v.addEventListener("loadeddata", () => { v.play().catch(() => {}); }, { once: true });
+      v.play().catch(() => {});
     }
     const box = this.playerBox.current;
     if (box) {
