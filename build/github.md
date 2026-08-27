@@ -3,13 +3,12 @@ branch: main
 path: build
 
 ## Last sync
-date: 2026-08-25T02:06:10Z
+date: 2026-08-27T04:18:14Z
 
 ### Updated in this project
-- Confirmed the repo's `build/` copy already carries the latest index.html (tier 1 locked to 3/4/3, local logos, `lang="en"`).
-- No Brandfetch CDN references remain in the deployed source.
-- Flagged that the site files sit under `build/`, not the repo root — the likely cause of the deploy not appearing.
-- `uploads/` screenshots were committed to the repo and should be removed there.
+- Verified the repo's `build/index.html` matches the project root: `autopause=0`, imperative hero mount, bounded play nudges, tap-to-play overlay.
+- Hero reel stays on Vimeo; the self-hosted mp4 experiment was reverted.
+- Live site was serving an older build despite a current repo — diagnosed as CDN/asset cache, not the deploy path.
 
 ## Screen map
 | Project screen | Repo files |
@@ -20,3 +19,6 @@ date: 2026-08-25T02:06:10Z
 | Filmed-in map iframe | build/filmed-in-map.html |
 | Runtime + config | build/support.js, build/image-slot.js, build/wrangler.toml |
 | Images | build/assets/** |
+
+## Sync history
+- 2026-08-25T02:06:10Z — confirmed `build/` copy carried latest index.html; flagged files sitting under `build/` rather than repo root, and `uploads/` screenshots committed in error.

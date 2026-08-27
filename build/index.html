@@ -475,7 +475,7 @@ class Component extends DCLogic {
       // BOUNDED nudges — three attempts, each cancelled the moment the player
       // reports it is really playing. Unbounded retries are what strobed the
       // reel; never replace this with an interval.
-      const delays = [500, 1500, 3000];
+      const delays = [700, 1600, 3200];
       let i = 0;
       const nudge = () => {
         if (this.confirmedPlaying || !this.api) return;
@@ -484,7 +484,18 @@ class Component extends DCLogic {
         if (i < delays.length) this.nudgeTimer = setTimeout(nudge, delays[i++]);
         else this.setState({ needsTap: true });
       };
-      this.api.on("loaded", () => { this.nudgeTimer = setTimeout(nudge, delays[i++]); });
+      // Kick the chain off immediately AND on "loaded". If player.js finishes
+      // loading after the iframe already emitted "loaded", that event never
+      // reaches us and a loaded-only chain would never start — the reel then
+      // parks on frame one forever. nudge() is idempotent and self-cancelling.
+      this.startNudges = () => {
+        if (this.nudgesStarted || this.confirmedPlaying) return;
+        this.nudgesStarted = true;
+        nudge();
+      };
+      this.api.on("loaded", this.startNudges);
+      this.api.getPaused().then(p => { if (p !== false) this.startNudges(); }).catch(() => this.startNudges());
+      setTimeout(this.startNudges, 800);
       return true;
     };
     if (!bindPlayer()) {
