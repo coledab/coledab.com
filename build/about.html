@@ -33,6 +33,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Schibsted+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <style>
+  @media (max-width: 640px) {
+    nav[aria-label="Main"] {
+      top: 14px !important;
+      right: 12px !important;
+      flex-direction: column !important;
+      gap: 6px !important;
+      align-items: stretch !important;
+    }
+    nav[aria-label="Main"] a {
+      font-size: 9px !important;
+      padding: 9px 13px !important;
+      text-align: center;
+      background: rgba(10,10,11,.62) !important;
+      -webkit-backdrop-filter: blur(9px);
+      backdrop-filter: blur(9px);
+    }
+  }
+
   /* Tagline is locked to the logotype's width at every viewport: its font-size is
      a fixed 0.222 ratio of the logotype's (both clamps share the same 5.4vw term
      and crossover points), which lands within ~0.6%, and justify closes the rest.

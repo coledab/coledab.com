@@ -32,9 +32,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Schibsted+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
-<script src="https://player.vimeo.com/api/player.js"></script>
+<script src="https://player.vimeo.com/api/player.js" async></script>
 <script src="./image-slot.js"></script>
 <style>
+  @media (max-width: 640px) {
+    nav[aria-label="Main"] {
+      top: 14px !important;
+      right: 12px !important;
+      flex-direction: column !important;
+      gap: 6px !important;
+      align-items: stretch !important;
+    }
+    nav[aria-label="Main"] a {
+      font-size: 9px !important;
+      padding: 9px 13px !important;
+      text-align: center;
+      background: rgba(10,10,11,.62) !important;
+      -webkit-backdrop-filter: blur(9px);
+      backdrop-filter: blur(9px);
+    }
+  }
+
   /* Tagline is locked to the logotype's rendered width — the font-size below is
      only a pre-JS fallback; the script at the end of <body> measures the h1 and
      sets the exact size (Fraunces' optical-size axis makes ink non-linear, so no
@@ -75,7 +93,7 @@
     </div>
     <div style="width:100%;max-width:1400px;margin:0 auto">
       <div ref="{{ playerBox }}" style="position:relative;aspect-ratio:16/9;background:#111113;overflow:hidden">
-        <iframe ref="{{ heroRef }}" src="https://player.vimeo.com/video/1194676841?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;playsinline=1&amp;dnt=1" title="Cole Dabney | Director Reel | 2026" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" tabindex="-1" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+        <div ref="{{ heroMount }}" style="position:absolute;inset:0"></div>
         <div style="position:absolute;bottom:0;right:0;z-index:2;display:flex;gap:2px;padding:clamp(10px,1.4vw,18px);opacity:{{ controlsOpacity }};transition:opacity .45s cubic-bezier(.22,.61,.36,1)">
           <button type="button" onClick="{{ togglePlay }}" aria-label="{{ playLabel }}" style="width:36px;height:36px;display:grid;place-items:center;background:rgba(10,10,11,.5);border:0;color:#f2f2f0;cursor:pointer;transition:background .3s ease" style-hover="background:rgba(10,10,11,.85)">
             <sc-if value="{{ isPlaying }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 5h3.2v14H7zM13.8 5H17v14h-3.2z" fill="currentColor"></path></svg></sc-if><sc-if value="{{ isPaused }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 4.5l12 7.5-12 7.5z" fill="currentColor"></path></svg></sc-if>
@@ -98,7 +116,7 @@
 
     
     <section id="work" style="max-width:1400px;margin:0 auto;padding:clamp(28px,4vh,48px) clamp(24px,4vw,48px) 0">
-      <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:#0a0a0b;padding-bottom:10px;border-bottom:1px solid rgba(242,242,240,.14)"><span data-hl="1" style="display:inline-block;background:#f2f2f0;padding:.14em .22em .1em;margin-bottom:.16em">FEATURED DIRECTING WORK</span></h2>
+      <h2 style="margin:0;font-size:clamp(11px,3.5vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap;color:#0a0a0b;padding-bottom:10px;border-bottom:1px solid rgba(242,242,240,.14)"><span data-hl="1" style="display:inline-block;background:#f2f2f0;padding:.14em .22em .1em;margin-bottom:.16em">FEATURED DIRECTING WORK</span></h2>
       <ul style="margin:0;padding:10px 0 0;list-style:none;display:grid;gap:clamp(10px,1.2vw,17px);grid-template-columns:{{ gridColumns }}">
         <sc-for list="{{ videos }}" as="v" hint-placeholder-count="12">
           <li>
@@ -125,7 +143,7 @@
         </sc-for>
       </ul>
     </section><section style="max-width:1400px;margin:0 auto;padding:clamp(32px,5vh,62px) clamp(24px,4vw,48px) 0">
-      <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:#0a0a0b;padding-bottom:10px;border-bottom:1px solid rgba(242,242,240,.14)"><span data-hl="1" style="display:inline-block;background:#f2f2f0;padding:.14em .22em .1em;margin-bottom:.16em">Artists filmed</span></h2>
+      <h2 style="margin:0;font-size:clamp(11px,3.5vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap;color:#0a0a0b;padding-bottom:10px;border-bottom:1px solid rgba(242,242,240,.14)"><span data-hl="1" style="display:inline-block;background:#f2f2f0;padding:.14em .22em .1em;margin-bottom:.16em">Artists filmed</span></h2>
       <div data-artists="1" style="padding:14px clamp(10px,2vw,28px) clamp(10px,1.5vw,22px);display:flex;flex-direction:column;align-items:center;gap:clamp(26px,3.4vw,48px);max-width:1180px;width:100%;margin:0 auto;text-align:center">
         <sc-for list="{{ tierGroups }}" as="g" hint-placeholder-count="4">
           <div data-tier="{{ g.tier }}" style="width:100%;display:flex;flex-direction:column;align-items:center;row-gap:{{ g.rowGap }};font-family:{{ g.fontFamily }};font-weight:{{ g.fontWeight }};font-size:{{ g.fontSize }};letter-spacing:{{ g.letterSpacing }};line-height:{{ g.lineHeight }};text-transform:uppercase;color:{{ g.textColor }}">
@@ -148,7 +166,7 @@
 
     <section style="max-width:1400px;margin:0 auto;padding:clamp(48px,7vh,84px) clamp(24px,4vw,48px) 0;display:grid;gap:clamp(32px,4vw,64px);grid-template-columns:{{ metaColumns }}">
       <div>
-        <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:#0a0a0b;padding-bottom:10px;text-align:center"><span data-hl="1" style="display:inline-block;background:#f2f2f0;padding:.14em .22em .1em;margin-bottom:.16em">Record Labels</span></h2>
+        <h2 style="margin:0;font-size:clamp(11px,3.5vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap;color:#0a0a0b;padding-bottom:10px;text-align:center"><span data-hl="1" style="display:inline-block;background:#f2f2f0;padding:.14em .22em .1em;margin-bottom:.16em">Record Labels</span></h2>
         <sc-if value="{{ asLogos }}" hint-placeholder-val="{{ true }}">
           <ul style="margin:0;padding:14px 0 0;list-style:none;display:flex;align-items:center;justify-content:center;gap:clamp(40px,4.5vw,70px);overflow:hidden">
             <sc-for list="{{ labels }}" as="l" hint-placeholder-count="0">
@@ -170,7 +188,7 @@
         </sc-if>
       </div>
       <div style="border-left:{{ colRule }};padding-left:{{ colPad }}">
-        <h2 style="margin:0;font-size:clamp(22px,1.95vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:#0a0a0b;padding-bottom:10px;text-align:center"><span data-hl="1" style="display:inline-block;background:#f2f2f0;padding:.14em .22em .1em;margin-bottom:.16em">As seen on</span></h2>
+        <h2 style="margin:0;font-size:clamp(11px,3.5vw,27px);font-weight:500;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap;color:#0a0a0b;padding-bottom:10px;text-align:center"><span data-hl="1" style="display:inline-block;background:#f2f2f0;padding:.14em .22em .1em;margin-bottom:.16em">As seen on</span></h2>
         <sc-if value="{{ asLogos }}" hint-placeholder-val="{{ true }}">
           <ul style="margin:0;padding:14px 0 0;list-style:none;display:flex;align-items:center;justify-content:center;gap:clamp(40px,4.5vw,70px);overflow:hidden">
             <sc-for list="{{ featured }}" as="f" hint-placeholder-count="0">
@@ -195,7 +213,7 @@
 
     <section aria-label="Countries filmed in" style="max-width:1400px;margin:0 auto;padding:clamp(64px,9vh,110px) clamp(24px,4vw,48px) 0;display:grid;gap:clamp(32px,4vw,64px);grid-template-columns:minmax(0,1fr);align-items:stretch">
             <div style="display:flex;flex-direction:column">
-        <h2 style="margin: 0; font-size: clamp(22px,1.95vw,27px); font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color:#0a0a0b;padding-bottom:10px; border-bottom: 1px solid rgba(242,242,240,.14); line-height: 1.2"><span data-hl="1" style="display:inline-block;color:#f2f2f0;margin-bottom:.16em"><span style="color:#ff5a36">{{ countryTotal }} Countries.</span> <span style="color:#ff5a36">5 Continents.</span></span></h2>
+        <h2 style="margin: 0; font-size: clamp(11px,3.5vw,27px); font-weight: 500; letter-spacing: .13em; text-transform: uppercase; white-space: nowrap; color:#0a0a0b;padding-bottom:10px; border-bottom: 1px solid rgba(242,242,240,.14); line-height: 1.2"><span data-hl="1" style="display:inline-block;color:#f2f2f0;margin-bottom:.16em"><span style="color:#ff5a36">{{ countryTotal }} Countries.</span> <span style="color:#ff5a36">5 Continents.</span></span></h2>
         <div style="padding:12px 0 0;display:grid;gap:clamp(24px,3vw,52px);grid-template-columns:{{ mapColumns }};align-items:center">
           <iframe ref="{{ mapRef }}" src="filmed-in-map.html" title="Map of countries filmed in" loading="lazy" style="width:100%;aspect-ratio:900/450;border:0;display:block;background:#0a0a0b"></iframe>
         <div style="display:flex;flex-direction:column;gap:clamp(10px,1.4vw,18px)">
@@ -349,9 +367,15 @@ const TIER_STYLE = {
   3: { fontFamily: GROTESK, fontWeight: 600, sepSize: "5px", fontSize: "clamp(11px,1.5vw,21px)", letterSpacing: ".05em", lineHeight: "1.02", textColor: "rgba(242,242,240,.74)", colGap: "clamp(10px,1.1vw,18px)", rowGap: "clamp(3px,.42vw,7px)" },
   4: { fontFamily: GROTESK, fontWeight: 500, sepSize: "4px", fontSize: "clamp(11px,1.3vw,17px)", letterSpacing: ".14em", lineHeight: "1.15", textColor: "rgba(242,242,240,.5)", colGap: "clamp(8px,.85vw,14px)", rowGap: "5px" }
 };
+// Diamonds are sized off the tier's rendered type, never a fixed px, so they
+// shrink with the names on small screens.
+const SEP_FULL = { 1: 13, 2: 8, 3: 5, 4: 4 };
+// Full-size type per tier — the source of the desktop size ratios, which the
+// narrow layout reuses so the hierarchy reads the same on a phone.
+const DESK_MAX = { 1: 78, 2: 48, 3: 21, 4: 17 };
 const TIER_ROWS = { 1: 3, 2: 4, 3: 4, 4: 4 };
 const FLOOR = 0.72;
-const NARROW_PX = { 1: 22, 2: 13.5, 3: 12, 4: 11.5 };
+const NARROW_PX = { 1: 20, 2: 10, 3: 7.5, 4: 7 };
 const TIER_SEP = { 1: 13, 2: 8, 3: 5, 4: 4 };
 const TIER_GAP = { 1: 14, 2: 12, 3: 10, 4: 8 };
 // How far a line may stretch its diamond gaps to reach its ramp width, as a
@@ -408,31 +432,42 @@ const slideWindow = (arr, size, idx) => {
 class Component extends DCLogic {
   state = { playing: true, volume: 0, hovering: false, active: null, hover: null, labelIdx: 0, featuredIdx: 0, artistRows: null, wide: !!(typeof window !== "undefined" && window.innerWidth >= 1200), touch: !!(typeof window !== "undefined" && window.matchMedia && window.matchMedia("(hover:none),(max-width:820px)").matches) };
   heroRef = React.createRef();
+  heroMount = React.createRef();
   mapRef = React.createRef();
   playerBox = React.createRef();
   lastVolume = 0.7;
 
   componentDidMount() {
-    if (window.Vimeo && this.heroRef.current) {
+    // The reel iframe is mounted imperatively, ONCE, outside React's tree.
+    // Leaving it in the template let unrelated re-renders (row measuring, logo
+    // probes) rebuild the node, which reloads the embed and reads as a flicker
+    // loop that never starts. Never move this back into the template.
+    const mount = this.heroMount.current;
+    if (mount && !mount.firstChild) {
+      const f = document.createElement("iframe");
+      f.src = "https://player.vimeo.com/video/1194676841?background=1&autoplay=1&muted=1&loop=1&playsinline=1&dnt=1";
+      f.title = "Cole Dabney | Director Reel | 2026";
+      f.allow = "autoplay; fullscreen; picture-in-picture";
+      f.setAttribute("allowfullscreen", "");
+      f.tabIndex = -1;
+      f.style.cssText = "position:absolute;inset:0;width:100%;height:100%;border:0";
+      mount.appendChild(f);
+      this.heroRef.current = f;
+    }
+    const bindPlayer = () => {
+      if (this.api || !window.Vimeo || !this.heroRef.current) return !!this.api;
       this.api = new window.Vimeo.Player(this.heroRef.current);
-      const kick = () => {
-        if (!this.api || this.kicking) return;
-        this.kicking = true;
-        this.api.setMuted(true).catch(() => {});
-        this.api.play().catch(() => {}).then(() => { setTimeout(() => { this.kicking = false; }, 600); });
-      };
-      this.api.ready().then(kick).catch(() => {});
-      this.kick = () => { kick(); document.removeEventListener("touchstart", this.kick); document.removeEventListener("click", this.kick); };
-      document.addEventListener("touchstart", this.kick, { passive: true, once: true });
-      document.addEventListener("click", this.kick, { once: true });
-      // One recovery attempt only. Retrying on every pause event fights the
-      // player when autoplay is blocked: play → reject → pause → play, which is
-      // what makes the reel strobe.
-      this.api.on("pause", () => {
-        if (!this.state.playing || this.recovered) return;
-        this.recovered = true;
-        setTimeout(kick, 400);
-      });
+      // The iframe URL handles the single autoplay. Nothing here may call play()
+      // on its own: scripted retries fight the player and strobe the reel.
+      // The API is for the play/pause, volume and end-of-reel state only.
+      this.api.on("play", () => { if (!this.state.playing) this.setState({ playing: true }); });
+      this.api.on("pause", () => { if (this.state.playing) this.setState({ playing: false }); });
+
+      return true;
+    };
+    if (!bindPlayer()) {
+      this.bindTimer = setInterval(() => { if (bindPlayer()) clearInterval(this.bindTimer); }, 300);
+      setTimeout(() => clearInterval(this.bindTimer), 15000);
     }
     const box = this.playerBox.current;
     if (box) {
@@ -485,7 +520,7 @@ class Component extends DCLogic {
         // Narrow viewports drop the desktop reverse-V shape: 7 names on a line
         // would crush the type to ~7px. Rows are added until it reads.
         const narrow = window.innerWidth < 820;
-        let counts = narrow ? [] : (TIER_SHAPE[t] || []).slice();
+        let counts = (narrow && t !== 1) ? [] : (TIER_SHAPE[t] || []).slice();
         if (counts.reduce((a, b) => a + b, 0) !== total) {
           const target = TIER_ROWS[t];
           const base = Math.floor(total / target), extra = total % target;
@@ -527,7 +562,7 @@ class Component extends DCLogic {
         // floor settled on, each line is filled up to its ramp target, so the lines
         // step down naturally instead of an even split forcing them all equal.
         // Tier 1 is authored, not solved: 3/4/3 always, at whatever size fits.
-        if (!narrow && t === 1) { counts = TIER_SHAPE[1].slice(); scale = Math.max(0.45, scaleFor(counts)); }
+        if (t === 1) { counts = TIER_SHAPE[1].slice(); scale = Math.max(0.3, scaleFor(counts)); }
         if (!narrow && !authored && t !== 1) {
           const f = scale / (prev || 1);
           const step = avail * 0.055;
@@ -609,17 +644,17 @@ class Component extends DCLogic {
         this.needsRepass = false;
         requestAnimationFrame(() => requestAnimationFrame(this.measureRows));
       }
-      // Narrow layouts add rows per tier independently, which can leave a lower
-      // tier set larger than the one above it. Re-impose the hierarchy.
-      if (window.innerWidth < 820) {
-        const STEP = { 2: 0.82, 3: 0.9, 4: 0.94 };
+      // Narrow layouts solve each tier independently, which flattens the size
+      // hierarchy. Re-impose the DESKTOP proportions: every tier is sized as a
+      // fixed percentage of tier 1, exactly as it is on a wide screen, with an
+      // absolute floor so the smallest names still read.
+      if (window.innerWidth < 820 && next[1]) {
+        const t1 = next[1].basePx * next[1].scale;
         [2, 3, 4].forEach(t => {
-          const a = next[t], p = next[t - 1];
-          if (!a || !p) return;
-          // Never shrink a tier below the legibility floor to enforce the step —
-          // weight and opacity carry the hierarchy once sizes converge.
-          const cap = Math.max(NARROW_PX[t], p.basePx * p.scale * STEP[t]);
-          if (a.basePx * a.scale > cap) a.scale = Math.round((cap / a.basePx) * 1000) / 1000;
+          const a = next[t];
+          if (!a) return;
+          const want = Math.max(NARROW_PX[t], t1 * (DESK_MAX[t] / DESK_MAX[1]));
+          if (a.basePx * a.scale > want) a.scale = Math.round((want / a.basePx) * 1000) / 1000;
         });
       }
       const cur = this.state.artistRows || {};
@@ -655,6 +690,7 @@ class Component extends DCLogic {
     }, 3000);
   }
   componentWillUnmount() {
+    clearInterval(this.bindTimer);
     document.removeEventListener("keydown", this.onKey);
     window.removeEventListener("message", this.onMapMsg);
     (this.sweepTimers || []).forEach(clearTimeout);
@@ -734,9 +770,17 @@ class Component extends DCLogic {
     const v = active != null ? VIDEOS[active] : null;
     return {
       heroRef: this.heroRef,
+      heroMount: this.heroMount,
       playerBox: this.playerBox,
       year: new Date().getFullYear(),
-      tierGroups: [1, 2, 3, 4].map(t => {
+      tierGroups: (() => {
+        // Authored diamond sizes hold on desktop and shrink together below 820px,
+        // so the 1 > 2 > 3 > 4 ramp is preserved at every width.
+        const vw = typeof window !== "undefined" ? window.innerWidth : 1400;
+        const shrink = Math.max(0.42, Math.min(1, vw / 820));
+        const seps = {};
+        [1, 2, 3, 4].forEach(t => { seps[t] = Math.round(SEP_FULL[t] * shrink * 10) / 10; });
+        return [1, 2, 3, 4].map(t => {
         const names = ARTISTS.filter(a => a.tier === t).map(a => a.name);
         const st = Object.assign({}, TIER_STYLE[t]);
         if (this.state.touch) st.colGap = t === 1 ? "7px" : t === 2 ? "6px" : "5px";
@@ -752,8 +796,10 @@ class Component extends DCLogic {
           if (items.length) rows.push({ items: items, gap: g ? g + "px" : st.colGap });
         });
         if (i < names.length) rows.push({ items: names.slice(i).map((nm, j) => ({ name: nm, sep: false })), gap: st.colGap });
+        st.sepSize = seps[t] + "px";
         return Object.assign({ tier: t }, st, { rows: rows });
-      }),
+        });
+      })(),
       labels: slideWindow(LABELS, 3, this.state.labelIdx).map(l => this.creditSlot(l, 72)),
       featured: slideWindow(FEATURED, 3, this.state.featuredIdx).map(f => this.creditSlot(f, 68)),
       asLogos: (this.props.creditsStyle ?? "Logos") === "Logos",
